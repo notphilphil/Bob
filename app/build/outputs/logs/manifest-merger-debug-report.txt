@@ -1,0 +1,71 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml:1:1-15:12
+	package
+		ADDED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml:3:5-54
+		INJECTED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml
+		INJECTED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml
+		INJECTED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml:1:11-69
+	android:versionCode
+		INJECTED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml
+		INJECTED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml
+application
+ADDED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml:6:5-13:19
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/notphilphil/.android/build-cache/f496907384b83ae218179e638ed25c1b45f664b0/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /home/notphilphil/.android/build-cache/75561d0d72cfbd1267295d2d6cd928c91265fce9/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /home/notphilphil/.android/build-cache/57d973ec7562ffaa6dd4194ef9911cd2e0999246/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /home/notphilphil/.android/build-cache/9fce891c438a2c312399c8809f654f863d57b26d/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /home/notphilphil/.android/build-cache/2c91548b5ef4ffa8e10a71e460bdf03749d44e22/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /home/notphilphil/.android/build-cache/5e249c28188a0b7d2bab14b3c45c8708352ea58f/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /home/notphilphil/.android/build-cache/5096d598e57908b092946c78efce734fb3483fdf/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /home/notphilphil/.android/build-cache/d6e030fe0d7f79b1c75d7917faa2d385eabd7925/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /home/notphilphil/.android/build-cache/3b01536ce4e06388f226ee46ae32a9dfff653854/output/AndroidManifest.xml:29:5-20
+	android:label
+		ADDED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml:7:9-41
+	android:supportsRtl
+		ADDED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml:10:9-35
+	android:roundIcon
+		ADDED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml:9:9-54
+	android:allowBackup
+		ADDED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml:6:18-44
+	android:icon
+		ADDED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml:8:9-43
+	android:theme
+		ADDED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml:11:9-40
+uses-sdk
+INJECTED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/notphilphil/.android/build-cache/f496907384b83ae218179e638ed25c1b45f664b0/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /home/notphilphil/.android/build-cache/75561d0d72cfbd1267295d2d6cd928c91265fce9/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /home/notphilphil/.android/build-cache/57d973ec7562ffaa6dd4194ef9911cd2e0999246/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /home/notphilphil/.android/build-cache/9fce891c438a2c312399c8809f654f863d57b26d/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /home/notphilphil/.android/build-cache/2c91548b5ef4ffa8e10a71e460bdf03749d44e22/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /home/notphilphil/.android/build-cache/5e249c28188a0b7d2bab14b3c45c8708352ea58f/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /home/notphilphil/.android/build-cache/5096d598e57908b092946c78efce734fb3483fdf/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /home/notphilphil/.android/build-cache/d6e030fe0d7f79b1c75d7917faa2d385eabd7925/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /home/notphilphil/.android/build-cache/3b01536ce4e06388f226ee46ae32a9dfff653854/output/AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/notphilphil/.android/build-cache/f496907384b83ae218179e638ed25c1b45f664b0/output/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml
+		INJECTED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml
+		INJECTED from /home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/notphilphil/.android/build-cache/f496907384b83ae218179e638ed25c1b45f664b0/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-v4:26.0.0-alpha1] /home/notphilphil/.android/build-cache/75561d0d72cfbd1267295d2d6cd928c91265fce9/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-media-compat:26.0.0-alpha1] /home/notphilphil/.android/build-cache/57d973ec7562ffaa6dd4194ef9911cd2e0999246/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-fragment:26.0.0-alpha1] /home/notphilphil/.android/build-cache/9fce891c438a2c312399c8809f654f863d57b26d/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-ui:26.0.0-alpha1] /home/notphilphil/.android/build-cache/2c91548b5ef4ffa8e10a71e460bdf03749d44e22/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:support-core-utils:26.0.0-alpha1] /home/notphilphil/.android/build-cache/5e249c28188a0b7d2bab14b3c45c8708352ea58f/output/AndroidManifest.xml:25:5-27:41
+MERGED from [com.android.support:animated-vector-drawable:26.0.0-alpha1] /home/notphilphil/.android/build-cache/5096d598e57908b092946c78efce734fb3483fdf/output/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-vector-drawable:26.0.0-alpha1] /home/notphilphil/.android/build-cache/d6e030fe0d7f79b1c75d7917faa2d385eabd7925/output/AndroidManifest.xml:22:5-24:41
+MERGED from [com.android.support:support-compat:26.0.0-alpha1] /home/notphilphil/.android/build-cache/3b01536ce4e06388f226ee46ae32a9dfff653854/output/AndroidManifest.xml:25:5-27:41
+	android:value
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/notphilphil/.android/build-cache/f496907384b83ae218179e638ed25c1b45f664b0/output/AndroidManifest.xml:27:9-38
+	android:name
+		ADDED from [com.android.support:appcompat-v7:26.0.0-alpha1] /home/notphilphil/.android/build-cache/f496907384b83ae218179e638ed25c1b45f664b0/output/AndroidManifest.xml:26:9-47

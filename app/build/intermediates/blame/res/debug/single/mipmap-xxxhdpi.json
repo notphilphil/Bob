@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/notphilphil/Documents/Gatech/CanoliCrusaders/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher.png",
+        "source": "/home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/notphilphil/Documents/Gatech/CanoliCrusaders/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher_round.png",
+        "source": "/home/notphilphil/Documents/Gatech/CanoliCrusaders/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    }
+]
