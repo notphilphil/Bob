@@ -1,5 +1,9 @@
 package edu.gatech.oad.antlab.person;
 
+import java.util.HashSet;
+import java.util.Random;
+import java.util.List;
+
 /**
  *  A simple class for person 2
  *  returns their name and a
@@ -30,8 +34,25 @@ public class Person2 {
 	 * @return the modified string
 	 */
 	private String calc(String input) {
-	  //Person 2 put your implementation here
-	  return null;
+	  int length = input.length();
+	  Character[] list = new Character[length];
+	  HashSet<Integer> checked = new HashSet();
+	  int i = 0;
+	  while (i < length) {
+            list[i] = input.charAt(i);
+            i++;
+        }
+      String result = "";
+	  while (result.length() < length) {
+	      int random = new Random().nextInt(length);
+	      if (!checked.contains(random)) {
+	          System.out.println("here");
+	          result = result + list[random];
+	          checked.add(random);
+          }
+      }
+      System.out.println("END");
+	  return result;
 	}
 	/**
 	 * Return a string rep of this object
