@@ -46,12 +46,10 @@ public class Person2 {
 	  while (result.length() < length) {
 	      int random = new Random().nextInt(length);
 	      if (!checked.contains(random)) {
-	          System.out.println("here");
 	          result = result + list[random];
 	          checked.add(random);
           }
       }
-      System.out.println("END");
 	  return result;
 	}
 	/**
