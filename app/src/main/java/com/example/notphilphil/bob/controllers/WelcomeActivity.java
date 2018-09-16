@@ -1,7 +1,9 @@
-package com.example.notphilphil.bob;
+package com.example.notphilphil.bob.controllers;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.notphilphil.bob.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 
