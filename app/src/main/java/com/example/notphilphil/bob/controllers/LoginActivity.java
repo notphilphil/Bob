@@ -48,9 +48,15 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!curr_login.equals(login)) {
             login_et.setError("Login error! Bad username");
+            return;
         }
         if (!curr_password.equals(password)) {
             password_et.setError("Login error! Bad password");
+            return;
         }
+        // Would normally put authentication here but the above if's are enough (M4)
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
