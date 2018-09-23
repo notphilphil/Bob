@@ -55,7 +55,8 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         // Would normally put authentication here but the above if's are enough (M4)
-//        Intent intent = new Intent(this, HomeActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
