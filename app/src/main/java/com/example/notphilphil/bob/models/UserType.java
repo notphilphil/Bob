@@ -6,13 +6,13 @@ public class UserType {
     private String name ;
 
 
-    public void UserType() {
+    UserType() {
         userID = "jDoe3" ;
         name = "John Doe" ;
     }
 
 
-    public void UserType(String id, String aName) {
+    UserType(String id, String aName) {
         userID = id ;
         name = aName ;
 

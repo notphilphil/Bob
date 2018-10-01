@@ -1,16 +1,14 @@
 package com.example.notphilphil.bob.models;
 
-import android.location.Location;
-
 public class EmployeeType extends UserType {
 
     private int employeeID;
     private Location locationID;
 
-    public void EmployeeType(int _employeeID, Location _locationID) {
+    EmployeeType(int _employeeID, Location _location) {
+        super();
         employeeID = _employeeID;
-        locationID = _locationID;
-
+        locationID = _location;
     }
 
     public int getEmployeeID() {
