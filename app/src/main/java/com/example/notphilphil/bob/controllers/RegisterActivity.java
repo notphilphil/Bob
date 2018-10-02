@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.notphilphil.bob.R;
+import com.example.notphilphil.bob.models.UserType;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -30,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         userSpinner = (Spinner) findViewById(R.id.userspinner);
 
-        ArrayAdapter<String> classAdapter = new ArrayAdapter (this,android.R.layout.simple_spinner_item, Student.legalClasses);
+        ArrayAdapter<String> classAdapter = new ArrayAdapter (this,android.R.layout.simple_spinner_item, UserType.legalUserTypes);
         classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userSpinner.setAdapter(classAdapter);
     }

@@ -1,23 +1,33 @@
 package com.example.notphilphil.bob.models;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class UserType {
+
+    public static List<String> legalUserTypes = Arrays.asList("User", "Admin", "Manager", "Location Employee");
 
     private String userID ;
     private String name ;
 
-    public static List<String>
-
-
-    UserType() {
+    public UserType() {
         userID = "jDoe3" ;
         name = "John Doe" ;
     }
 
-
-    UserType(String id, String aName) {
+    public UserType(String id, String aName) {
         userID = id ;
         name = aName ;
 
+    }
+
+    public static int findPosition(String code) {
+        int i = 0;
+        while (i < legalUserTypes.size()) {
+            if (code.equals(legalUserTypes.get(i))) return i;
+            ++i;
+        }
+        return 0;
     }
 
     public String getName() {
