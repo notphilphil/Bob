@@ -10,7 +10,6 @@ import android.widget.EditText;
 import com.example.notphilphil.bob.R;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -56,12 +55,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     /**
      *
-     * @param un
-     * @param em
-     * @param pw
-     * @return
+     * @param un username as a string
+     * @param em email as a string
+     * @param pw password as a string
+     * @return boolean reflecting whether or not the user was successfully registered
      */
-    private boolean registerUser(String un, String em, String pw /* UserType ut */) throws FileNotFoundException, IOException {
+    private boolean registerUser(String un, String em, String pw /* UserType ut */) throws IOException {
         if (un.isEmpty() || em.isEmpty() || pw.isEmpty()) {
             return false;
         }
@@ -69,13 +68,16 @@ public class RegisterActivity extends AppCompatActivity {
         File regUsers = new File(cacheDir, "regUsers.txt");
         FileOutputStream fOut = new FileOutputStream(regUsers);
         OutputStreamWriter outWriter = new OutputStreamWriter(fOut);
+        String toWrite = un+","+em+","+pw;
         if (regUsers.exists()) {
             // Does exist, just write to file
-            outWriter.append("\n"+un+","+em+","+pw);
+            toWrite = "\n" + toWrite;
+            outWriter.append(toWrite);
         } else {
             // Doesn't exist, create new file
-            regUsers.createNewFile();
-            outWriter.write(un+","+em+","+pw);
+            if (regUsers.createNewFile()) {
+                outWriter.write(toWrite);
+            }
         }
         outWriter.close();
         fOut.close();
