@@ -5,6 +5,8 @@ public class UserType {
     private String userID ;
     private String name ;
 
+    public static List<String>
+
 
     UserType() {
         userID = "jDoe3" ;

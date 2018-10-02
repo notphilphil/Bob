@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.example.notphilphil.bob.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private Spinner userSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,5 +27,11 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        userSpinner = (Spinner) findViewById(R.id.userspinner);
+
+        ArrayAdapter<String> classAdapter = new ArrayAdapter (this,android.R.layout.simple_spinner_item, Student.legalClasses);
+        classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        userSpinner.setAdapter(classAdapter);
     }
 }
