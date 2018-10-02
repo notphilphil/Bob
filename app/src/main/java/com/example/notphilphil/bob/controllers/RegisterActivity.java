@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.notphilphil.bob.R;
+import com.example.notphilphil.bob.models.UserType;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,6 +19,7 @@ import java.io.OutputStreamWriter;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private Spinner userSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +37,18 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        userSpinner = (Spinner) findViewById(R.id.userspinner);
+
+        ArrayAdapter<String> classAdapter = new ArrayAdapter (this,android.R.layout.simple_spinner_item, UserType.legalUserTypes);
+        classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        userSpinner.setAdapter(classAdapter);
+
         register_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = ((EditText) findViewById(R.id.login_et)).getText().toString();
+                String username = ((EditText) findViewById(R.id.username_et)).getText().toString();
                 String email = ((EditText) findViewById(R.id.email_et)).getText().toString();
-                String password = ((EditText) findViewById(R.id.password_et)).getText().toString();
+                String password = ((EditText) findViewById(R.id.email_et)).getText().toString();
                 // Get user type from the selector thing
                 try {
                     if (registerUser(username, email, password /* include user type */)) {
