@@ -3,11 +3,14 @@ package com.example.notphilphil.bob.controllers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.notphilphil.bob.R;
+import com.example.notphilphil.bob.models.Employee;
+import com.example.notphilphil.bob.models.User;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText login_et;
@@ -26,19 +29,12 @@ public class LoginActivity extends AppCompatActivity {
         Button login_bt = findViewById(R.id.login_button);
         Button register_bt = findViewById(R.id.register_button);
 
-        login_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginPressed(v);
-            }
-        });
-        register_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), RegisterActivity.class);
-                intent.putExtra("username", login_et.getText().toString());
-                startActivity(intent);
-            }
+        login_bt.setOnClickListener(this::loginPressed);
+
+        register_bt.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), RegisterActivity.class);
+            intent.putExtra("username", login_et.getText().toString());
+            startActivity(intent);
         });
     }
 
@@ -55,6 +51,30 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         // Would normally put authentication here but the above if's are enough (M4)
+        Class<?> loggedUserType;
+        // Need to store user type in app file
+        switch ((int) (Math.random() * 4)) {
+            case 0:
+                loggedUserType = User.class;
+                break;
+            case 1:
+                loggedUserType = Employee.class;
+                break;
+            case 2:
+                loggedUserType = User.class;
+                break;
+            case 3:
+                loggedUserType = Employee.class;
+                break;
+            default: return;
+        }
+        try {
+            LoggedUser.newInstance(new User("12345", "Bob"));
+        } catch (Exception err) {
+            Log.d("Login", err.getMessage());
+        }
+
+        LoggedUser.logOut();
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
         finish();

@@ -3,6 +3,7 @@ package com.example.notphilphil.bob.controllers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -10,10 +11,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.notphilphil.bob.R;
-import com.example.notphilphil.bob.models.UserType;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
@@ -39,7 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         userSpinner = (Spinner) findViewById(R.id.userspinner);
 
-        ArrayAdapter<String> classAdapter = new ArrayAdapter (this,android.R.layout.simple_spinner_item, UserType.legalUserTypes);
+        ArrayAdapter<String> classAdapter = new ArrayAdapter (this,android.R.layout.simple_spinner_item, LoggedUser.legalUserTypes);
         classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userSpinner.setAdapter(classAdapter);
 
@@ -70,21 +72,29 @@ public class RegisterActivity extends AppCompatActivity {
      * @param pw password as a string
      * @return boolean reflecting whether or not the user was successfully registered
      */
-    private boolean registerUser(String un, String em, String pw /* UserType ut */) throws IOException {
+    private boolean registerUser(String un, String em, String pw /* User ut */) throws IOException {
         if (un.isEmpty() || em.isEmpty() || pw.isEmpty()) {
             return false;
         }
-        File cacheDir = getApplicationContext().getCacheDir();
-        File regUsers = new File(cacheDir, "regUsers.txt");
+        File dir = getApplicationContext().getFilesDir();
+        File regUsers = new File(dir, "regUsers.txt");
         FileOutputStream fOut = new FileOutputStream(regUsers);
         OutputStreamWriter outWriter = new OutputStreamWriter(fOut);
         String toWrite = un+","+em+","+pw;
         if (regUsers.exists()) {
             // Does exist, just write to file
+            BufferedReader br = new BufferedReader(new FileReader(regUsers));
+            String line;
+            Log.d("Registration", "File already includes: ");
+            while ((line = br.readLine()) != null) {
+                Log.d("Registration", line+"\n");
+            }
             toWrite = "\n" + toWrite;
             outWriter.append(toWrite);
+            br.close();
         } else {
             // Doesn't exist, create new file
+            Log.d("Registration", "File doesn't exist, first registration");
             if (regUsers.createNewFile()) {
                 outWriter.write(toWrite);
             }
