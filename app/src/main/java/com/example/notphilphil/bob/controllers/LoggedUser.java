@@ -40,6 +40,16 @@ public class LoggedUser<T> {
         LoggedUser.employee = value;
         return new LoggedUser<>(value);
     }
+    
+    public static LoggedUser<Manager> newInstance(Manager value) {
+        LoggedUser.manager = value;
+        return new LoggedUser<>(value);
+    }
+
+    public static LoggedUser<Admin> newInstance(Admin value) {
+        LoggedUser.admin = value;
+        return new LoggedUser<>(value);
+    }
 
     private LoggedUser(T newLoggedUser) {
         LoggedUser.name = name;
