@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.notphilphil.bob.R;
 import com.example.notphilphil.bob.models.Admin;
@@ -25,7 +26,6 @@ import java.io.OutputStreamWriter;
 public class RegisterActivity extends AppCompatActivity {
 
     private Spinner userSpinner;
-    private Button register_bt;
     private EditText un_et;
     private EditText em_et;
     private EditText pw_et;
@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         Button back_to_login_bt = findViewById(R.id.login_button);
-        register_bt = findViewById(R.id.register_button);
+        Button register_bt = findViewById(R.id.register_button);
         userSpinner = findViewById(R.id.userspinner);
         un_et = findViewById(R.id.username_et);
         em_et = findViewById(R.id.email_et);
@@ -97,6 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (un.isEmpty() || em.isEmpty() || pw.isEmpty()) {
             return false;
         }
+        boolean found_duplicate = false;
         File regUsers = new File(getApplicationContext().getFilesDir(), "regUsers.txt");
         OutputStreamWriter outWriter =
                 new OutputStreamWriter(new FileOutputStream(regUsers, true));
@@ -111,15 +112,18 @@ public class RegisterActivity extends AppCompatActivity {
                     pw.equals(parts[2]) &&
                     ut.equals(parts[3])) {
                     Log.d("Registration", "Account already exists");
-                    register_bt.setError("This account already exists! Go back to login");
+                    String text = "Account already exists, logging with credentials";
+                    Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
+                    toast.show();
+                    found_duplicate = true;
                 } else {
                     Log.d("Registration", "Email in use");
                     emError = "Invalid: Email already in use";
+                    return false;
                 }
-                return false;
             }
         }
-        outWriter.append(toWrite);
+        if (!found_duplicate) outWriter.append(toWrite);
         outWriter.close();
 
         switch (LoggedUser.PermissionsEnum.valueOf(ut)) {
