@@ -1,4 +1,4 @@
 package com.example.notphilphil.bob.models;
 
-public class Admin {
+public class Admin extends User {
 }

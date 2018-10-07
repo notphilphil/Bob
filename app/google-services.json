@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "435274184901",
+    "firebase_url": "https://cs2340bob.firebaseio.com",
+    "project_id": "cs2340bob",
+    "storage_bucket": "cs2340bob.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435274184901:android:4e19e04daab24d26",
+        "android_client_info": {
+          "package_name": "com.example.notphilphil.bob"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "435274184901-9tqs9fr005rikhc6q3adr6ev50uurnt8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8I1kiDKG0AK8d-_1RemdD3D8cjHR8ras"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

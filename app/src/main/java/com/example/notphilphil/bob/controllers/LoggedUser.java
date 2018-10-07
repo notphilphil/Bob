@@ -1,9 +1,7 @@
 package com.example.notphilphil.bob.controllers;
 
-import android.util.Log;
-
 import com.example.notphilphil.bob.models.Admin;
-import com.example.notphilphil.bob.models.Employee;
+import com.example.notphilphil.bob.models.LocationEmployee;
 import com.example.notphilphil.bob.models.Manager;
 import com.example.notphilphil.bob.models.User;
 
@@ -16,7 +14,11 @@ public class LoggedUser<T> {
     from actions that are above their permission level.
      */
     protected enum PermissionsEnum {
-        NONE, USER, LOCATION_EMPLOYEE, MANAGER, ADMIN
+        NONE,
+        USER,
+        LOCATION_EMPLOYEE,
+        MANAGER,
+        ADMIN
     }
     public static List<String> legalUserTypes = Arrays.asList("User", "Admin", "Manager", "Location Employee");
 
@@ -26,32 +28,32 @@ public class LoggedUser<T> {
     private static boolean loggedIn;
 
     private static User user;
-    private static Employee employee;
+    private static LocationEmployee employee;
     private static Manager manager;
     private static Admin admin;
 
 
-    public static LoggedUser<User> newInstance(User value) {
+    static void newInstance(User value) {
         LoggedUser.user = value;
-        return new LoggedUser<>(value);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.USER);
     }
 
-    public static LoggedUser<Employee> newInstance(Employee value) {
+    static void newInstance(LocationEmployee value) {
         LoggedUser.employee = value;
-        return new LoggedUser<>(value);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.LOCATION_EMPLOYEE);
     }
     
-    public static LoggedUser<Manager> newInstance(Manager value) {
+    static void newInstance(Manager value) {
         LoggedUser.manager = value;
-        return new LoggedUser<>(value);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.MANAGER);
     }
 
-    public static LoggedUser<Admin> newInstance(Admin value) {
+    static void newInstance(Admin value) {
         LoggedUser.admin = value;
-        return new LoggedUser<>(value);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.ADMIN);
     }
 
-    private LoggedUser(T newLoggedUser) {
+    private LoggedUser(String name, String id, PermissionsEnum permissions) {
         LoggedUser.name = name;
         LoggedUser.id = id;
         LoggedUser.permissions = permissions;
