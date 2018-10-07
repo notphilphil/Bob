@@ -21,6 +21,7 @@ public class HomeActivity extends AppCompatActivity {
         Button logout_bt = findViewById(R.id.logout_bt);
 
         logout_bt.setOnClickListener(v -> {
+            LoggedUser.logOut();
             Intent intent = new Intent(v.getContext(), LoginActivity.class);
             startActivity(intent);
             finish();
