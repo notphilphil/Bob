@@ -7,16 +7,14 @@ public class Location {
     private double longitude;
     private String destination;
 
-    Location() {
-        latitude = 0;
-        longitude = 0;
-        destination = "Empty Location";
-    }
-
-    Location(double lat, double lon, String dest) {
+    public Location(double lat, double lon, String dest) {
         latitude = lat;
         longitude = lon;
         destination = dest;
+    }
+
+    public Location() {
+        this(0, 0, "Empty Location");
     }
 
     /**
