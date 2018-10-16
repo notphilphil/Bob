@@ -17,7 +17,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        TextView welcome_tv = findViewById(R.id.welcome_tv);
         Button logout_bt = findViewById(R.id.logout_bt);
         Button location_bt = findViewById(R.id.location_bt);
 
@@ -28,8 +27,6 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         });
 
-        String newT = "Welcome, " + LoggedUser.getName();
-        welcome_tv.setText(newT);
         location_bt.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), LocationsActivity.class);
             startActivity(intent);

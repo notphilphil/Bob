@@ -18,7 +18,6 @@
         </activity>
         <activity android:name=".controllers.RegisterActivity" />
         <activity android:name=".controllers.HomeActivity" />
-        <activity android:name=".controllers.ImportLocationsActivity"></activity>
         <activity android:name=".controllers.LocationsActivity" />
     </application>
 

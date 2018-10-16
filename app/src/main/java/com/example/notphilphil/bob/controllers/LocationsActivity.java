@@ -3,8 +3,9 @@ package com.example.notphilphil.bob.controllers;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-//import android.support.v7.widget.LinearLayoutManager;
-//import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,10 +19,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LocationsActivity extends AppCompatActivity {
-        private ListView locations;
-        ArrayAdapter adapter;
+    private ListView locations;
+    ArrayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,43 +37,51 @@ public class LocationsActivity extends AppCompatActivity {
 
         locations = (ListView) findViewById(R.id.location_list);
 
-        ArrayAdapter locationsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getLocations());
-        locations.setAdapter(locationsAdapter);
-
-        home_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), HomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        try {
+            ArrayAdapter locationsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getLocationNames());
+            locations.setAdapter(locationsAdapter);
+            String[] names = getLocationNames();
+            ArrayList<String[]> info = getLocationInformation();
+        } catch (IOException err) {
+            Log.d("LocationsStuff", "Something went wrong, " + err.getMessage());
+        }
+        home_bt.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), HomeActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 
-    private String[] getLocations() {
+    private ArrayList<String[]> getLocationInformation() throws IOException {
+        InputStream ins = getResources()
+                .openRawResource(
+                        getResources()
+                                .getIdentifier("location_data", "raw", getPackageName()));
+        BufferedReader br = new BufferedReader(new InputStreamReader(ins));
+        ArrayList<String[]> info = new ArrayList<>();
+        String line;
+        br.readLine();
+        while ((line = br.readLine()) != null) {
+            info.add(line.split(","));
+        }
+        return info;
+    }
 
-        String csvFile = "app" + File.separator + "res" + File.separator + "locationdata.csv";
-        BufferedReader br = null;
-        String line = "";
-        String cvsSplitBy = ",";
-
-        try {
-            br = new BufferedReader(new FileReader(csvFile));
-            line = br.readLine();
-            String[] information = line.split(",");
-            return information;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } return null;
+    private String[] getLocationNames() throws IOException {
+        InputStream ins = getResources()
+                .openRawResource(
+                        getResources()
+                                .getIdentifier("location_data", "raw", getPackageName()));
+        BufferedReader br = new BufferedReader(new InputStreamReader(ins));
+        ArrayList<String> info = new ArrayList<>();
+        String line = br.readLine();
+        int index = Arrays.asList(line.split(",")).indexOf("Name");
+        while ((line = br.readLine()) != null) {
+            info.add(line.split(",")[index]);
+        }
+        String[] arr = new String[info.size()];
+        int idx = 0;
+        for (String i : info) { arr[idx++] = i; }
+        return arr;
     }
 }

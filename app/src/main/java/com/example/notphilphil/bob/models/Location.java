@@ -3,56 +3,75 @@ package com.example.notphilphil.bob.models;
 import com.example.notphilphil.bob.errors.InvalidLocationException;
 
 public class Location {
+    private String name;
+    private String type;
     private double latitude;
     private double longitude;
-    private String destination;
+    private String address;
+    private String phone;
 
-    public Location(double lat, double lon, String dest) {
-        latitude = lat;
-        longitude = lon;
-        destination = dest;
+    public Location(String name, String type, double latitude, double longitude, String address, String phone) {
+        this.name = name;
+        this.type = type;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.address = address;
+        this.phone = phone;
     }
 
     public Location() {
-        this(0, 0, "Empty Location");
+        this("Test", "Test", 0, 0, "123 Baker St.", "123-456-7890");
     }
 
-    /**
-     * Set new latitude and longitude for this Location object
-     *
-     * @param loc New location in array form [latitude, longitude]
-     * @throws InvalidLocationException
-     */
-    public void setLocation(double[] loc) throws InvalidLocationException {
-        if (loc.length != 2) {
-            throw new InvalidLocationException("New location must be length 2");
-        }
-        latitude = loc[0];
-        longitude = loc[1];
+    public String getName() {
+        return name;
     }
 
-    /**
-     * Set the new destination for this Location object
-     *
-     * @param dest New location destination
-     */
-    public void setDestination(String dest) {
-        destination = dest;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public double getLatitude() {
         return latitude;
     }
 
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
     public double getLongitude() {
         return longitude;
     }
 
-    public String getDestination() {
-        return destination;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String toString() {
-        return destination + " at [" + latitude + ", " + longitude + "]";
+        return name + " at [" + latitude + ", " + longitude + "]";
     }
 }
