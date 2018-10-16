@@ -1,5 +1,7 @@
 package com.example.notphilphil.bob.controllers;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -50,6 +52,34 @@ public class LocationsActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+        locations.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                try {
+                    displayAlert(position);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void displayAlert(int position) throws IOException
+    {
+        new AlertDialog.Builder(this).setMessage(
+                "Latitude:\t" + getLocationInformation().get(position)[2] +
+                        "\nLongitude: " + getLocationInformation().get(position)[3] +
+                        "\nStreet Address: " + getLocationInformation().get(position)[4] +
+                        "\nCity: " + getLocationInformation().get(position)[5] +
+                        "\nState: " + getLocationInformation().get(position)[6] +
+                        "\nZip: " + getLocationInformation().get(position)[7] +
+                        "\nType: " + getLocationInformation().get(position)[8] +
+                        "\nPhone: " + getLocationInformation().get(position)[9] +
+                        "\nWebsite: " + getLocationInformation().get(position)[10]
+        )
+                .setTitle(getLocationInformation().get(position)[1])
+                .setCancelable(true)
+                .show();
     }
 
     private ArrayList<String[]> getLocationInformation() throws IOException {
