@@ -16,11 +16,21 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         Button logout_bt = findViewById(R.id.logout_bt);
+        Button location_bt = findViewById(R.id.location_bt);
 
         logout_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        location_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), LocationsActivity.class);
                 startActivity(intent);
                 finish();
             }
