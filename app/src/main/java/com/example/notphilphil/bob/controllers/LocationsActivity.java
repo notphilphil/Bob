@@ -42,8 +42,6 @@ public class LocationsActivity extends AppCompatActivity {
         try {
             ArrayAdapter locationsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getLocationNames());
             locations.setAdapter(locationsAdapter);
-            String[] names = getLocationNames();
-            ArrayList<String[]> info = getLocationInformation();
         } catch (IOException err) {
             Log.d("LocationsStuff", "Something went wrong, " + err.getMessage());
         }
@@ -52,32 +50,30 @@ public class LocationsActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-        locations.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                try {
-                    displayAlert(position);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        locations.setOnItemClickListener((parent, view, position, id) -> {
+            try {
+                displayAlert(position);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }
 
     public void displayAlert(int position) throws IOException
     {
+        ArrayList<String[]> info = getLocationInformation();
         new AlertDialog.Builder(this).setMessage(
-                "Latitude:\t" + getLocationInformation().get(position)[2] +
-                        "\nLongitude: " + getLocationInformation().get(position)[3] +
-                        "\nStreet Address: " + getLocationInformation().get(position)[4] +
-                        "\nCity: " + getLocationInformation().get(position)[5] +
-                        "\nState: " + getLocationInformation().get(position)[6] +
-                        "\nZip: " + getLocationInformation().get(position)[7] +
-                        "\nType: " + getLocationInformation().get(position)[8] +
-                        "\nPhone: " + getLocationInformation().get(position)[9] +
-                        "\nWebsite: " + getLocationInformation().get(position)[10]
+                "Latitude:\t" + info.get(position)[2] +
+                        "\nLongitude: " + info.get(position)[3] +
+                        "\nStreet Address: " + info.get(position)[4] +
+                        "\nCity: " + info.get(position)[5] +
+                        "\nState: " + info.get(position)[6] +
+                        "\nZip: " + info.get(position)[7] +
+                        "\nType: " + info.get(position)[8] +
+                        "\nPhone: " + info.get(position)[9] +
+                        "\nWebsite: " + info.get(position)[10]
         )
-                .setTitle(getLocationInformation().get(position)[1])
+                .setTitle(info.get(position)[1])
                 .setCancelable(true)
                 .show();
     }
