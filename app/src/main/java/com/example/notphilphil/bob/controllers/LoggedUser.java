@@ -1,9 +1,15 @@
 package com.example.notphilphil.bob.controllers;
 
+import android.content.Context;
+import android.database.DatabaseUtils;
+
 import com.example.notphilphil.bob.models.Admin;
 import com.example.notphilphil.bob.models.LocationEmployee;
 import com.example.notphilphil.bob.models.Manager;
 import com.example.notphilphil.bob.models.User;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,32 +38,36 @@ public class LoggedUser<T> {
     private static Manager manager;
     private static Admin admin;
 
+    protected static DatabaseReference ref;
 
-    static void newInstance(User value) {
+
+    static void newInstance(User value, Context cont) {
         LoggedUser.user = value;
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.USER);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.USER, cont);
     }
 
-    static void newInstance(LocationEmployee value) {
+    static void newInstance(LocationEmployee value, Context cont) {
         LoggedUser.employee = value;
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.LOCATION_EMPLOYEE);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.LOCATION_EMPLOYEE, cont);
     }
     
-    static void newInstance(Manager value) {
+    static void newInstance(Manager value, Context cont) {
         LoggedUser.manager = value;
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.MANAGER);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.MANAGER, cont);
     }
 
-    static void newInstance(Admin value) {
+    static void newInstance(Admin value, Context cont) {
         LoggedUser.admin = value;
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.ADMIN);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.ADMIN, cont);
     }
 
-    private LoggedUser(String name, String id, PermissionsEnum permissions) {
+    private LoggedUser(String name, String id, PermissionsEnum permissions, Context cont) {
         LoggedUser.name = name;
         LoggedUser.id = id;
         LoggedUser.permissions = permissions;
         LoggedUser.loggedIn = true;
+        FirebaseApp.initializeApp(cont);
+        LoggedUser.ref = FirebaseApp.getInstance().getReference();
     }
 
     public static String getName() {

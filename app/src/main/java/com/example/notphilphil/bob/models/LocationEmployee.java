@@ -3,12 +3,12 @@ package com.example.notphilphil.bob.models;
 public class LocationEmployee extends User {
 
     private int employeeID;
-    private Location locationID;
+    private Location location;
 
     public LocationEmployee(String userID, String name, int _employeeID, Location _location) {
         super(userID, name);
         employeeID = _employeeID;
-        locationID = _location;
+        location = _location;
     }
 
     public LocationEmployee(String userID, String name) {
@@ -23,11 +23,11 @@ public class LocationEmployee extends User {
         return employeeID;
     }
 
-    public Location getLocationID() {
-        return locationID;
+    public Location getLocation() {
+        return location;
     }
 
     public String toString() {
-        return "My employee ID is " + employeeID + " and my location ID is: " + locationID ;
+        return "My employee ID is " + employeeID + " and my location is: " + location ;
     }
 }

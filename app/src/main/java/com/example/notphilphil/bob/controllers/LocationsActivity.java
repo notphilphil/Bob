@@ -1,15 +1,10 @@
 package com.example.notphilphil.bob.controllers;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -17,9 +12,6 @@ import android.widget.ListView;
 import com.example.notphilphil.bob.R;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,17 +19,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class LocationsActivity extends AppCompatActivity {
-    private ListView locations;
-    ArrayAdapter adapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locations);
 
         Button home_bt = findViewById(R.id.home_bt);
-
-        locations = (ListView) findViewById(R.id.location_list);
+        ListView locations = findViewById(R.id.location_list);
 
         try {
             ArrayAdapter locationsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, getLocationNames());
