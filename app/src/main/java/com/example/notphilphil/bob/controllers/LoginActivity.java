@@ -56,10 +56,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (curr_login.equals(parts[0]) && curr_password.equals(parts[2])) {
                         switch (LoggedUser.PermissionsEnum.valueOf(parts[3])) {
                             case NONE: break;
-                            case USER: LoggedUser.newInstance(new User(parts[1], parts[0])); break;
-                            case LOCATION_EMPLOYEE: LoggedUser.newInstance(new LocationEmployee(parts[1], parts[0])); break;
-                            case MANAGER: LoggedUser.newInstance(new Manager()); break;
-                            case ADMIN: LoggedUser.newInstance(new Admin()); break;
+                            case USER: LoggedUser.newInstance(new User(parts[1], parts[0]), getBaseContext()); break;
+                            case LOCATION_EMPLOYEE: LoggedUser.newInstance(new LocationEmployee(parts[1], parts[0]), getBaseContext()); break;
+                            case MANAGER: LoggedUser.newInstance(new Manager(), getBaseContext()); break;
+                            case ADMIN: LoggedUser.newInstance(new Admin(), getBaseContext()); break;
                             default: break;
                         }
                         Intent intent = new Intent(this, HomeActivity.class);

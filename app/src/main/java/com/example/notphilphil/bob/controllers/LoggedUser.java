@@ -1,15 +1,13 @@
 package com.example.notphilphil.bob.controllers;
 
 import android.content.Context;
-import android.database.DatabaseUtils;
 
 import com.example.notphilphil.bob.models.Admin;
 import com.example.notphilphil.bob.models.LocationEmployee;
 import com.example.notphilphil.bob.models.Manager;
 import com.example.notphilphil.bob.models.User;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,7 +36,7 @@ public class LoggedUser<T> {
     private static Manager manager;
     private static Admin admin;
 
-    protected static DatabaseReference ref;
+    private static DatabaseReference ref;
 
 
     static void newInstance(User value, Context cont) {
@@ -66,8 +64,7 @@ public class LoggedUser<T> {
         LoggedUser.id = id;
         LoggedUser.permissions = permissions;
         LoggedUser.loggedIn = true;
-        FirebaseApp.initializeApp(cont);
-        LoggedUser.ref = FirebaseApp.getInstance().getReference();
+        LoggedUser.ref = FirebaseDatabase.getInstance().getReference();
     }
 
     public static String getName() {
@@ -92,6 +89,10 @@ public class LoggedUser<T> {
 
     public static void setPermissions(PermissionsEnum permissions) {
         LoggedUser.permissions = permissions;
+    }
+
+    public static DatabaseReference getRef() {
+        return ref;
     }
 
     public static boolean isLoggedIn() {

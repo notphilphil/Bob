@@ -19,6 +19,9 @@
         <activity android:name=".controllers.RegisterActivity" />
         <activity android:name=".controllers.HomeActivity" />
         <activity android:name=".controllers.LocationsActivity" />
+        <activity android:name=".controllers.LocationDetailsActivity" />
+        <activity android:name=".controllers.ItemDetailsActivity" />
+        <activity android:name=".controllers.ModifyItemActivity"></activity>
     </application>
 
 </manifest>

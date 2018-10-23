@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.notphilphil.bob.R;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -17,8 +18,6 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-        FirebaseApp.initializeApp(this);
 
         Button logout_bt = findViewById(R.id.logout_bt);
         Button location_bt = findViewById(R.id.location_bt);

@@ -9,4 +9,12 @@
     <string name="email">Email:</string>
     <string name="logout_bt">Logout</string>
     <string name="view_location">View</string>
+    <string name="view_info">View Info</string>
+    <string name="edit">Edit</string>
+    <string name="type">Type</string>
+    <string name="color">Color</string>
+    <string name="id">ID</string>
+    <string name="price">Price</string>
+    <string name="back">Return</string>
+    <string name="delete">Delete</string>
 </resources>

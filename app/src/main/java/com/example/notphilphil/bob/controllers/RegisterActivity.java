@@ -128,10 +128,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         switch (LoggedUser.PermissionsEnum.valueOf(ut)) {
             case NONE: return false;
-            case USER: LoggedUser.newInstance(new User(em, un)); break;
-            case LOCATION_EMPLOYEE: LoggedUser.newInstance(new LocationEmployee(em, un)); break;
-            case MANAGER: LoggedUser.newInstance(new Manager()); break;
-            case ADMIN: LoggedUser.newInstance(new Admin()); break;
+            case USER: LoggedUser.newInstance(new User(em, un), getBaseContext()); break;
+            case LOCATION_EMPLOYEE: LoggedUser.newInstance(new LocationEmployee(em, un), getBaseContext()); break;
+            case MANAGER: LoggedUser.newInstance(new Manager(), getBaseContext()); break;
+            case ADMIN: LoggedUser.newInstance(new Admin(), getBaseContext()); break;
             default: return false;
         }
         Log.d("Registration", "Registration successful");
