@@ -1,12 +1,13 @@
 package com.example.notphilphil.bob.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Inventory {
-    private ArrayList<Item> items;
+    private List<Item> items;
     private String key;
 
-    public Inventory(ArrayList<Item> items, String key) {
+    public Inventory(List<Item> items, String key) {
         this.items = items;
         this.key = key;
     }
@@ -15,7 +16,7 @@ public class Inventory {
         this(new ArrayList<>(), "key");
     }
 
-    public ArrayList<Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
