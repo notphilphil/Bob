@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.notphilphil.bob.R;
 import com.example.notphilphil.bob.models.Item;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 public class LocationDetailsActivity extends AppCompatActivity {
     private String key;
     private ArrayList<Item> items;
+    private SearchView item_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class LocationDetailsActivity extends AppCompatActivity {
         ListView item_list = findViewById(R.id.item_list);
         populateList(item_list, this);
         handleInfo(findViewById(R.id.info_btn), this);
+
+        item_search = (SearchView) findViewById(R.id.item_search);
 
         FloatingActionButton add_btn = findViewById(R.id.add_btn);
         add_btn.setOnClickListener(v -> {
@@ -70,6 +75,20 @@ public class LocationDetailsActivity extends AppCompatActivity {
                     intent.putExtra("inventoryKey", key);
                     startActivity(intent);
                 }));
+
+                item_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        itemsAdapter.getFilter().filter(query);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        itemsAdapter.getFilter().filter(newText);
+                        return false;
+                    }
+                });
             }
 
             @Override
