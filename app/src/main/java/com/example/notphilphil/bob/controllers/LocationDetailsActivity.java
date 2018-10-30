@@ -8,10 +8,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.example.notphilphil.bob.R;
 import com.example.notphilphil.bob.models.Item;
@@ -27,6 +31,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
     private String key;
     private ArrayList<Item> items;
     private SearchView item_search;
+    private Spinner category_spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
         handleInfo(findViewById(R.id.info_btn), this);
 
         item_search = (SearchView) findViewById(R.id.item_search);
+        category_spinner = findViewById(R.id.category_spinner);
 
         FloatingActionButton add_btn = findViewById(R.id.add_btn);
         add_btn.setOnClickListener(v -> {
@@ -57,6 +63,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> names = new ArrayList<>();
+                ArrayList<String> categories = new ArrayList<>();
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Item newItem = new Item();
                     items.clear();
@@ -66,8 +73,14 @@ public class LocationDetailsActivity extends AppCompatActivity {
                     newItem.setKey(item.getKey());
                     items.add(newItem);
                     names.add(newItem.toString());
+                    categories.add(newItem.getCategory());
                 }
                 ArrayAdapter itemsAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, names);
+                ArrayAdapter<String> categoryAdapter =
+                        new ArrayAdapter<>(context, android.R.layout.simple_spinner_item,
+                                categories);
+                categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                category_spinner.setAdapter(categoryAdapter);
                 item_list.setAdapter(itemsAdapter);
                 item_list.setOnItemClickListener(((parent, view, position, id) -> {
                     Intent intent = new Intent(context, ItemDetailsActivity.class);
@@ -75,6 +88,8 @@ public class LocationDetailsActivity extends AppCompatActivity {
                     intent.putExtra("inventoryKey", key);
                     startActivity(intent);
                 }));
+
+
 
                 item_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
@@ -89,7 +104,24 @@ public class LocationDetailsActivity extends AppCompatActivity {
                         return false;
                     }
                 });
+
+                OnItemSelectedListener categorySelectedListener;
+                category_spinner.setOnItemSelectedListener(categorySelectedListener = new Spinner.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> spinner, View container,
+                                               int position, long id) {
+                        itemsAdapter.getFilter().filter(categories.get(position));
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> arg0) {
+                        // TODO Auto-generated method stub
+                    }
+                });
+
+                category_spinner.setOnItemSelectedListener(categorySelectedListener);
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
