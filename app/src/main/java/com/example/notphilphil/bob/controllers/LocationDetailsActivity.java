@@ -103,6 +103,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
                         itemsAdapter.getFilter().filter(newText);
                         return false;
                     }
+
                 });
 
                 OnItemSelectedListener categorySelectedListener;
@@ -110,7 +111,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onItemSelected(AdapterView<?> spinner, View container,
                                                int position, long id) {
-                        itemsAdapter.getFilter().filter(categories.get(position));
+                        itemsAdapter.getFilter().filter(names.get(position));
                     }
 
                     @Override
