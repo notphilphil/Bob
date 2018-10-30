@@ -16,6 +16,7 @@ public class ModifyItemActivity extends AppCompatActivity {
     private EditText color_et;
     private EditText id_et;
     private EditText price_et;
+    private EditText category_et;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class ModifyItemActivity extends AppCompatActivity {
         color_et = findViewById(R.id.color_et);
         id_et = findViewById(R.id.id_et);
         price_et = findViewById(R.id.price_et);
+        category_et = findViewById(R.id.category_et);
 
         boolean edit = this.getIntent().getBooleanExtra("edit", false);
 
@@ -41,7 +43,7 @@ public class ModifyItemActivity extends AppCompatActivity {
             String invKey = getIntent().getStringExtra("inventoryKey");
             if (edit) key = getIntent().getStringExtra("itemKey");
             else key = LoggedUser.getRef().child(getIntent().getStringExtra("inventoryKey")).push().getKey();
-            Item item = new Item(type_et.getText().toString(), id_et.getText().toString(), color_et.getText().toString(), Double.parseDouble(price_et.getText().toString()), key);
+            Item item = new Item(type_et.getText().toString(), id_et.getText().toString(), color_et.getText().toString(), Double.parseDouble(price_et.getText().toString()), key, category_et.getText().toString());
             LoggedUser.getRef().child("inventories").child(invKey).child(key).setValue(item);
             finish();
         });
@@ -54,5 +56,6 @@ public class ModifyItemActivity extends AppCompatActivity {
         color_et.setText(item.getColor());
         id_et.setText(item.getId());
         price_et.setText(String.valueOf(item.getPrice()));
+        category_et.setText(item.getCategory());
     }
 }
