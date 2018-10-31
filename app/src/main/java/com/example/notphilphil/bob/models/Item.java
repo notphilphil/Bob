@@ -85,6 +85,6 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return ""+this.color+" "+this.type+"\n$"+this.price+"\n"+this.category;
+        return ""+this.color+" "+this.type+" | "+this.category+"\n"+this.price;
     }
 }

@@ -26,12 +26,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class LocationDetailsActivity extends AppCompatActivity {
     private String key;
     private ArrayList<Item> items;
     private SearchView item_search;
     private Spinner category_spinner;
+    private ArrayList<String> categories = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +67,6 @@ public class LocationDetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ArrayList<String> names = new ArrayList<>();
-                ArrayList<String> categories = new ArrayList<>();
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     Item newItem = new Item();
                     items.clear();
@@ -73,8 +76,11 @@ public class LocationDetailsActivity extends AppCompatActivity {
                     newItem.setKey(item.getKey());
                     items.add(newItem);
                     names.add(newItem.toString());
-                    categories.add(newItem.getCategory());
+                    categories.add(newItem.getCategory().toLowerCase());
                 }
+                Set<String> categoriesWithoutDuplicates = new LinkedHashSet<String>(categories);
+                categories.clear();
+                categories.addAll(categoriesWithoutDuplicates);
                 ArrayAdapter itemsAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, names);
                 ArrayAdapter<String> categoryAdapter =
                         new ArrayAdapter<>(context, android.R.layout.simple_spinner_item,
@@ -94,13 +100,17 @@ public class LocationDetailsActivity extends AppCompatActivity {
                 item_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
-                        itemsAdapter.getFilter().filter(query);
+                        //itemsAdapter.getFilter().filter(query);
                         return false;
                     }
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
                         itemsAdapter.getFilter().filter(newText);
+
+                        if (itemsAdapter.isEmpty()) {
+                            Toast.makeText(LocationDetailsActivity.this, "No Match found", Toast.LENGTH_LONG).show();
+                        }
                         return false;
                     }
 
@@ -111,15 +121,14 @@ public class LocationDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onItemSelected(AdapterView<?> spinner, View container,
                                                int position, long id) {
-                        itemsAdapter.getFilter().filter(names.get(position));
+                        itemsAdapter.getFilter().filter(category_spinner.getSelectedItem().toString());
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> arg0) {
-                        // TODO Auto-generated method stub
+
                     }
                 });
-
                 category_spinner.setOnItemSelectedListener(categorySelectedListener);
             }
 
