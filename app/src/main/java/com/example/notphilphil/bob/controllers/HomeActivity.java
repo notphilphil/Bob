@@ -21,6 +21,13 @@ public class HomeActivity extends AppCompatActivity {
 
         Button logout_bt = findViewById(R.id.logout_bt);
         Button location_bt = findViewById(R.id.location_bt);
+        Button map_bt = findViewById(R.id.map_bt);
+
+        map_bt.setOnClickListener(v -> {
+            Intent intent = new Intent(this, Maps.class);
+            startActivity(intent);
+        });
+
 
         logout_bt.setOnClickListener(v -> {
             LoggedUser.logOut();
