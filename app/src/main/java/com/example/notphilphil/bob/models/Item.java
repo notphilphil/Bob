@@ -9,22 +9,24 @@ public class Item implements Serializable {
     private String type;
     private String id;
     private String color;
+    private String category;
     private double price;
 
     private String key;
 
-    private static String[] tokens = {"type", "id", "color", "price"};
+    private static String[] tokens = {"type", "id", "color", "price", "category"};
 
     public Item() {
-        this("type", "id", "color", 0, "key");
+        this("type", "id", "color", 0, "key", "category");
     }
 
-    public Item(String type, String id, String color, double price, String key) {
+    public Item(String type, String id, String color, double price, String key, String category) {
         this.type = type;
         this.id = id;
         this.color = color;
         this.price = price;
         this.key = key;
+        this.category = category;
     }
 
     public String getType() {
@@ -67,17 +69,22 @@ public class Item implements Serializable {
         this.key = key;
     }
 
+    public String getCategory() { return category; }
+
+    public void setCategory(String category) { this.category = category; }
+
     public void addValue(String key, String data) {
         switch (Arrays.asList(tokens).indexOf(key)) {
             case 0: this.setType(data); break;
             case 1: this.setId(data); break;
             case 2: this.setColor(data); break;
             case 3: this.setPrice(Double.parseDouble(data)); break;
+            case 4: this.setCategory(data); break;
         }
     }
 
     @Override
     public String toString() {
-        return "A beautiful "+this.color+" "+this.type+" at the low price of "+this.price;
+        return ""+this.color+" "+this.type+" | "+this.category+"\n"+this.price;
     }
 }

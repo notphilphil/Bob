@@ -13,11 +13,12 @@ public class Location {
     private double Longitude;
     private String City;
     private String Name;
+    private Inventory Inventory;
 
     public static String[] tokens = {"Latitude", "Longitude", "Street Address", "City", "State", "Zip", "Type", "Phone", "Website", "Name"};
     private String Key;
 
-    public Location(String zip, String type, String phone, String state, String streetAddress, String website, String latitude, String longitude, String city, String name, String key) {
+    public Location(String zip, String type, String phone, String state, String streetAddress, String website, String latitude, String longitude, String city, String name, String key, Inventory inventory) {
         Zip = zip;
         Type = type;
         Phone = phone;
@@ -29,10 +30,11 @@ public class Location {
         City = city;
         Name = name;
         Key = key;
+        Inventory = inventory;
     }
 
     public Location() {
-        this("zip", "type", "phone", "state", "streetAddress", "website", "0", "0", "city", "name", "key");
+        this("zip", "type", "phone", "state", "streetAddress", "website", "0", "0", "city", "name", "key", new Inventory());
     }
 
     public String getZip() {
