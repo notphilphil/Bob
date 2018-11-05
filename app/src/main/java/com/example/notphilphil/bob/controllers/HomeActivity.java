@@ -26,6 +26,7 @@ public class HomeActivity extends AppCompatActivity {
         map_bt.setOnClickListener(v -> {
             Intent intent = new Intent(this, Maps.class);
             startActivity(intent);
+            finish();
         });
 
 
@@ -39,7 +40,6 @@ public class HomeActivity extends AppCompatActivity {
         location_bt.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), LocationsActivity.class);
             startActivity(intent);
-            finish();
         });
     }
 }

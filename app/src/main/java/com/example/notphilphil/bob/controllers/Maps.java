@@ -1,5 +1,6 @@
 package com.example.notphilphil.bob.controllers;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -31,6 +32,12 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     /**
      * Manipulates the map once available.
@@ -58,9 +65,17 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                     double lt = Double.parseDouble((String) loc.child("Latitude").getValue());
                     double lg = Double.parseDouble((String) loc.child("Longitude").getValue());
                     LatLng newMarker = new LatLng(lt, lg);
-                    mMap.addMarker(new MarkerOptions().position(newMarker).title((String)loc.child("Name").getValue()));
+                    String name = (String)loc.child("Name").getValue();
+                    String phone = (String)loc.child("Phone").getValue();
+                    mMap.addMarker(new MarkerOptions()
+                            .position(newMarker)
+                            .title(name)
+                            .snippet("Phone: "+phone));
                 }
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(33.775331,-84.395824)));
+                mMap.moveCamera(CameraUpdateFactory
+                        .newLatLng(new LatLng(33.775331,-84.395824)));
+                mMap.setMaxZoomPreference(20);
+                mMap.setMinZoomPreference(10);
             }
 
                 @Override
