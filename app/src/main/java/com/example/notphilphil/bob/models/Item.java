@@ -80,6 +80,7 @@ public class Item implements Serializable {
             case 2: this.setColor(data); break;
             case 3: this.setPrice(Double.parseDouble(data)); break;
             case 4: this.setCategory(data); break;
+            default: break;
         }
     }
 
