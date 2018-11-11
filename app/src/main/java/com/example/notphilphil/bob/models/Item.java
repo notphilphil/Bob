@@ -14,7 +14,7 @@ public class Item implements Serializable {
 
     private String key;
 
-    private static String[] tokens = {"type", "id", "color", "price", "category"};
+    protected static String[] tokens = {"type", "id", "color", "price", "category"};
 
     public Item() {
         this("type", "id", "color", 0, "key", "category");
