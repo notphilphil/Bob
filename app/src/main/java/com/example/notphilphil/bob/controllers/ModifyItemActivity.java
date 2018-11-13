@@ -12,11 +12,12 @@ import com.example.notphilphil.bob.R;
 import com.example.notphilphil.bob.models.Item;
 
 public class ModifyItemActivity extends AppCompatActivity {
-    private EditText type_et;
-    private EditText color_et;
-    private EditText id_et;
-    private EditText price_et;
-    private EditText category_et;
+    protected EditText type_et;
+    protected EditText color_et;
+    protected EditText id_et;
+    protected EditText price_et;
+    protected EditText category_et;
+    protected boolean edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,30 +29,39 @@ public class ModifyItemActivity extends AppCompatActivity {
         id_et = findViewById(R.id.id_et);
         price_et = findViewById(R.id.price_et);
         category_et = findViewById(R.id.category_et);
+        edit = this.getIntent().getBooleanExtra("edit", false);
 
-        boolean edit = this.getIntent().getBooleanExtra("edit", false);
-
-        if (edit) populatePage(this.getIntent());
+        if (edit) populatePage((Item) this.getIntent().getSerializableExtra("item"));
 
         FloatingActionButton save_btn = findViewById(R.id.save_btn);
         FloatingActionButton trash_btn = findViewById(R.id.trash_btn);
 
         trash_btn.setOnClickListener(v -> this.onBackPressed());
-        save_btn.setOnClickListener(v -> {
-            Intent res = new Intent();
-            String key;
-            String invKey = getIntent().getStringExtra("inventoryKey");
-            if (edit) key = getIntent().getStringExtra("itemKey");
-            else key = LoggedUser.getRef().child(getIntent().getStringExtra("inventoryKey")).push().getKey();
-            Item item = new Item(type_et.getText().toString(), id_et.getText().toString(), color_et.getText().toString(), Double.parseDouble(price_et.getText().toString()), key, category_et.getText().toString());
-            LoggedUser.getRef().child("inventories").child(invKey).child(key).setValue(item);
-            finish();
-        });
+        save_btn.setOnClickListener(v -> this.onSave(getIntent()));
     }
 
-    private void populatePage(Intent intent) {
-        Item item = (Item) intent.getSerializableExtra("item");
+    protected Item onSave(Intent intent) {
+        String key;
+        String invKey;
+        Item item = new Item();
+        item.setType(type_et.getText().toString());
+        item.setId(id_et.getText().toString());
+        item.setColor(color_et.getText().toString());
+        item.setPrice(Double.parseDouble(price_et.getText().toString()));
+        item.setCategory(category_et.getText().toString());
+        if (!LoggedUser.getTesting()) {
+            invKey = intent.getStringExtra("inventoryKey");
+            if (edit) key = intent.getStringExtra("itemKey");
+            else key = LoggedUser.getRef().child(intent.getStringExtra("inventoryKey")).push().getKey();
+            item.setKey(key);
+            LoggedUser.getRef().child("inventories").child(invKey).child(key).setValue(item);
+            finish();
+            return null;
+        }
+        else return item;
+    }
 
+    protected void populatePage(Item item) {
         type_et.setText(item.getType());
         color_et.setText(item.getColor());
         id_et.setText(item.getId());

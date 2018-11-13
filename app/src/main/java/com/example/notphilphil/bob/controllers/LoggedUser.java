@@ -38,6 +38,7 @@ public class LoggedUser<T> {
 
     private static DatabaseReference ref;
 
+    private static boolean testing = false;
 
     static void newInstance(User value, Context cont) {
         LoggedUser.user = value;
@@ -64,7 +65,7 @@ public class LoggedUser<T> {
         LoggedUser.id = id;
         LoggedUser.permissions = permissions;
         LoggedUser.loggedIn = true;
-        LoggedUser.ref = FirebaseDatabase.getInstance().getReference();
+        if (!testing) LoggedUser.ref = FirebaseDatabase.getInstance().getReference();
     }
 
     public static String getName() {
@@ -98,6 +99,12 @@ public class LoggedUser<T> {
     public static boolean isLoggedIn() {
         return loggedIn;
     }
+
+    public static void setTesting(boolean newTesting) {
+        testing = newTesting;
+    }
+
+    public static boolean getTesting() { return testing; }
 
     public static void logOut() {
         LoggedUser.setName("");

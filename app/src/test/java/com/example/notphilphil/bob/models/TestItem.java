@@ -15,6 +15,7 @@ public class TestItem {
         Item testing = new Item();
 
         String[] sampleTokens = {"typeTest", "idTest", "colorTest", "1.0", "categoryTest"};
+        String sampleKey = "abcdefghijklmnopqrstuvwxyz123567890";
 
         //Test addValue - Type, Case 0
         testing.addValue(Item.tokens[0], sampleTokens[0]);
@@ -35,6 +36,10 @@ public class TestItem {
         //Test addValue - Category, Case 4
         testing.addValue(Item.tokens[4], sampleTokens[4]);
         assertEquals(sampleTokens[4], testing.getCategory());
+
+        //Test setKey
+        testing.setKey(sampleKey);
+        assertEquals(testing.getKey(), sampleKey);
 
         //Test addValue - Type, Default
         String toCompare = testing.toString();

@@ -29,17 +29,20 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         });
 
-
-        logout_bt.setOnClickListener(v -> {
-            LoggedUser.logOut();
-            Intent intent = new Intent(v.getContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
-        });
+        logout_bt.setOnClickListener(this::onLogout);
 
         location_bt.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), LocationsActivity.class);
             startActivity(intent);
         });
+    }
+
+    protected void onLogout(View v) {
+        LoggedUser.logOut();
+        if (!LoggedUser.getTesting()) {
+            Intent intent = new Intent(v.getContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
