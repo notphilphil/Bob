@@ -1,5 +1,6 @@
 package com.example.notphilphil.bob.controllers;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,7 +34,14 @@ public class LoginActivity extends AppCompatActivity {
         Button login_bt = findViewById(R.id.login_button);
         Button register_bt = findViewById(R.id.register_button);
 
-        login_bt.setOnClickListener(this::loginPressed);
+
+        login_bt.setOnClickListener(v -> {
+            String curr_login = login_et.getText().toString();
+            String curr_password = password_et.getText().toString();
+            File dir = getApplicationContext().getFilesDir();
+            File regUsers = new File(dir, "regUsers.txt");
+            loginPressed(curr_login, curr_password, regUsers, this);
+        });
 
         register_bt.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), RegisterActivity.class);
@@ -42,11 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    protected void loginPressed(View _view) {
-        String curr_login = login_et.getText().toString();
-        String curr_password = password_et.getText().toString();
-        File dir = getApplicationContext().getFilesDir();
-        File regUsers = new File(dir, "regUsers.txt");
+    protected boolean loginPressed(String curr_login, String curr_password, File regUsers, Context context) {
         if (regUsers.exists()) {
             try {
                 BufferedReader bReader = new BufferedReader(new FileReader(regUsers));
@@ -56,21 +60,28 @@ public class LoginActivity extends AppCompatActivity {
                     if (curr_login.equals(parts[0]) && curr_password.equals(parts[2])) {
                         switch (LoggedUser.PermissionsEnum.valueOf(parts[3])) {
                             case NONE: break;
-                            case USER: LoggedUser.newInstance(new User(parts[1], parts[0]), getBaseContext()); break;
-                            case LOCATION_EMPLOYEE: LoggedUser.newInstance(new LocationEmployee(parts[1], parts[0]), getBaseContext()); break;
-                            case MANAGER: LoggedUser.newInstance(new Manager(), getBaseContext()); break;
-                            case ADMIN: LoggedUser.newInstance(new Admin(), getBaseContext()); break;
+                            case USER: LoggedUser.newInstance(new User(parts[1], parts[0]), context); break;
+                            case LOCATION_EMPLOYEE: LoggedUser.newInstance(new LocationEmployee(parts[1], parts[0]), context); break;
+                            case MANAGER: LoggedUser.newInstance(new Manager(), context); break;
+                            case ADMIN: LoggedUser.newInstance(new Admin(), context); break;
                             default: break;
                         }
-                        Intent intent = new Intent(this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
+                        if (!LoggedUser.getTesting()) {
+                            Intent intent = new Intent(this, HomeActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        return true;
                     }
+
                 }
-                Log.d("Login", "Failed to validate login");
+
+//                Log.d("Login", "Failed to validate login");
+                return false;
             } catch (IOException err) {
                 Log.d("Login", "Got an error! " + err.getMessage());
             }
         }
+        return false;
     }
 }

@@ -20,7 +20,6 @@ public class TestLocation {
         assertEquals(testTokens[1], Double.toString(testing.getLongitude())) ;
     }
 
-
     @Test
     public void addStreetAddress() {
         testing.addValue(Location.tokens[2], testTokens[2]) ;

@@ -32,6 +32,9 @@ public class RegisterActivity extends AppCompatActivity {
     private String unError;
     private String emError;
     private String pwError;
+    private static boolean testing = false;
+    private File regUsers;
+    private String[] parts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,19 +97,21 @@ public class RegisterActivity extends AppCompatActivity {
      * @param ut user type as a string
      * @return boolean reflecting whether or not the user was successfully registered
      */
-    private boolean registerUser(String un, String em, String pw, String ut) throws IOException {
+    protected boolean registerUser(String un, String em, String pw, String ut) throws IOException {
         if (un.isEmpty() || em.isEmpty() || pw.isEmpty()) {
             return false;
         }
         boolean found_duplicate = false;
-        File regUsers = new File(getApplicationContext().getFilesDir(), "regUsers.txt");
+        if (!testing) {
+            regUsers = new File(getApplicationContext().getFilesDir(), "regUsers.txt");
+        }
         OutputStreamWriter outWriter =
                 new OutputStreamWriter(new FileOutputStream(regUsers, true));
         String toWrite = un+","+em+","+pw+","+ut+"\n";
         BufferedReader br = new BufferedReader(new FileReader(regUsers));
         String line;
         while ((line = br.readLine()) != null) {
-            String[] parts = line.split(",");
+            parts = line.split(",");
             // Might want to check for used username as well
             if (em.equals(parts[1])) {
                 if (un.equals(parts[0]) &&
@@ -137,5 +142,18 @@ public class RegisterActivity extends AppCompatActivity {
         }
         Log.d("Registration", "Registration successful");
         return true;
+    }
+    public static void setTesting(boolean newTesting) {
+        testing = newTesting;
+    }
+
+    public static boolean getTesting() { return testing; }
+
+    public void setRegUsers(File regUsers) {
+        this.regUsers = regUsers;
+    }
+
+    public String[] getParts() {
+        return parts;
     }
 }

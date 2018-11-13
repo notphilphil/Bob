@@ -12,9 +12,11 @@ android {
         exclude 'META-INF/license.txt'
         exclude 'META-INF/dependencies.txt'
         exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/LICENSE.md'
+        exclude 'META-INF/LICENSE-notice.md'
     }
     testOptions {
-        unitTests.returnDefaultValues = false
+        unitTests.returnDefaultValues = true
     }
     compileSdkVersion 27
     defaultConfig {

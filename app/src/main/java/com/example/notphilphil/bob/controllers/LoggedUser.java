@@ -40,6 +40,7 @@ public class LoggedUser<T> {
 
     private static boolean testing = false;
 
+
     static void newInstance(User value, Context cont) {
         LoggedUser.user = value;
         new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.USER, cont);
