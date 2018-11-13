@@ -73,6 +73,12 @@ public class Item implements Serializable {
 
     public void setCategory(String category) { this.category = category; }
 
+    /**
+     * Method to add values to the object without having to know what value
+     *
+     * @param key the key that represents where this value should go
+     * @param data the data that we are trying to put at a certain key
+     */
     public void addValue(String key, String data) {
         switch (Arrays.asList(tokens).indexOf(key)) {
             case 0: this.setType(data); break;

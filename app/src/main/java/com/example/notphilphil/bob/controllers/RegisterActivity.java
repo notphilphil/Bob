@@ -86,6 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     /**
+     * Tries to register a user given the four needed inputs.
      *
      * @param un username as a string
      * @param em email as a string

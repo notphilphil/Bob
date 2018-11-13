@@ -96,6 +96,10 @@ public class LoggedUser<T> {
         return ref;
     }
 
+    /**
+     * Method for if we are logged in.
+     * @return boolean determining if we are logged in
+     */
     public static boolean isLoggedIn() {
         return loggedIn;
     }
@@ -106,6 +110,10 @@ public class LoggedUser<T> {
 
     public static boolean getTesting() { return testing; }
 
+    /**
+     * Logs the current user out by resetting any possibly set values.
+     * Note, does not change testing.
+     */
     public static void logOut() {
         LoggedUser.setName("");
         LoggedUser.setId("");
