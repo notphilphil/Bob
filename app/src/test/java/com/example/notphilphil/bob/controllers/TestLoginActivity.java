@@ -1,14 +1,9 @@
 package com.example.notphilphil.bob.controllers;
 
 
-import android.content.Context;
 import android.test.mock.MockContext;
 
-import com.example.notphilphil.bob.controllers.LoginActivity;
-import com.google.firebase.database.FirebaseDatabase;
-
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -16,8 +11,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestLoginActivity {
     static File file;
