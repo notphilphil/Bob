@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         password_et = findViewById(R.id.email_et);
         Button login_bt = findViewById(R.id.login_button);
         Button register_bt = findViewById(R.id.register_button);
+        Button guest_bt = findViewById(R.id.guestButton);
 
 
         login_bt.setOnClickListener(v -> {
@@ -45,6 +46,12 @@ public class LoginActivity extends AppCompatActivity {
         register_bt.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), RegisterActivity.class);
             intent.putExtra("username", login_et.getText().toString());
+            startActivity(intent);
+        });
+
+        guest_bt.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), HomeActivity.class);
+            LoggedUser.newInstance();
             startActivity(intent);
         });
     }

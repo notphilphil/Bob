@@ -33,29 +33,35 @@ public class LoggedUser<T> {
 
     private static boolean testing = false;
 
+    static void newInstance() {
+        new LoggedUser<>("guest", "101", PermissionsEnum.NONE, "guest");
+    }
 
     static void newInstance(User value) {
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.USER);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.USER, "");
     }
 
     static void newInstance(LocationEmployee value) {
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.LOCATION_EMPLOYEE);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.LOCATION_EMPLOYEE, "");
     }
     
     static void newInstance(Manager value) {
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.MANAGER);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.MANAGER, "");
     }
 
     static void newInstance(Admin value) {
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.ADMIN);
+        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.ADMIN, "");
     }
 
-    private LoggedUser(String name, String id, PermissionsEnum permissions) {
+
+    private LoggedUser(String name, String id, PermissionsEnum permissions, String guest) {
         LoggedUser.name = name;
         LoggedUser.id = id;
         LoggedUser.permissions = permissions;
         LoggedUser.loggedIn = true;
-        if (!testing) LoggedUser.ref = FirebaseDatabase.getInstance().getReference();
+        if (!testing) {
+            LoggedUser.ref = FirebaseDatabase.getInstance().getReference(guest);
+        }
     }
 
     public static String getName() {
