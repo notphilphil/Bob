@@ -2,29 +2,17 @@ package com.example.notphilphil.bob.models;
 
 public class LocationEmployee extends User {
 
-    private int employeeID;
-    private Location location;
+    private final int employeeID;
+    private final Location location;
 
-    public LocationEmployee(String userID, String name, int _employeeID, Location _location) {
+    private LocationEmployee(String userID, String name, Location _location) {
         super(userID, name);
-        employeeID = _employeeID;
+        employeeID = 0;
         location = _location;
     }
 
     public LocationEmployee(String userID, String name) {
-        this(userID, name, 0, new Location());
-    }
-
-    public LocationEmployee() {
-        this("Test ID", "Test Name");
-    }
-
-    public int getEmployeeID() {
-        return employeeID;
-    }
-
-    public Location getLocation() {
-        return location;
+        this(userID, name, new Location());
     }
 
     public String toString() {

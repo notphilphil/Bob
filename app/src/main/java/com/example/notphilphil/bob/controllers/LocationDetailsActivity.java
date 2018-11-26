@@ -27,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class LocationDetailsActivity extends AppCompatActivity {
@@ -34,7 +35,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
     private ArrayList<Item> items;
     private SearchView item_search;
     private Spinner category_spinner;
-    private ArrayList<String> categories = new ArrayList<>();
+    private final ArrayList<String> categories = new ArrayList<>();
 
 
     @Override
@@ -71,7 +72,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
                     Item newItem = new Item();
                     items.clear();
                     for (DataSnapshot val : item.getChildren()) {
-                        newItem.addValue(val.getKey(), val.getValue().toString());
+                        newItem.addValue(val.getKey(), Objects.requireNonNull(val.getValue()).toString());
                     }
                     newItem.setKey(item.getKey());
                     items.add(newItem);
@@ -148,9 +149,9 @@ public class LocationDetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String body = "";
-                String title = dataSnapshot.child("Name").getValue().toString();
+                String title = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
                 for (String token : Location.tokens) {
-                    body += token + ": " + dataSnapshot.child(token).getValue().toString() + "\n";
+                    body += token + ": " + Objects.requireNonNull(dataSnapshot.child(token).getValue()).toString() + "\n";
                 }
                 String finalBody = body;
                 info_btn.setOnClickListener(v -> {

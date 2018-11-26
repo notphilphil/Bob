@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class LocationsActivity extends AppCompatActivity {
     @Override
@@ -48,8 +49,8 @@ public class LocationsActivity extends AppCompatActivity {
                 Iterable<DataSnapshot> locs = dataSnapshot.getChildren();
                 for (DataSnapshot loc : locs) {
                     Location newLoc = new Location();
-                    names.add(loc.child("Name").getValue().toString());
-                    for (DataSnapshot val : loc.getChildren()) newLoc.addValue(val.getKey(), val.getValue().toString());
+                    names.add(Objects.requireNonNull(loc.child("Name").getValue()).toString());
+                    for (DataSnapshot val : loc.getChildren()) newLoc.addValue(val.getKey(), Objects.requireNonNull(val.getValue()).toString());
                     newLoc.setKey(loc.getKey());
                     locations.add(newLoc);
                 }

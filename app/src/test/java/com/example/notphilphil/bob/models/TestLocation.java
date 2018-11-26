@@ -5,8 +5,8 @@ import static org.junit.Assert.* ;
 
 public class TestLocation {
 
-    public static final String[] testTokens = {"84.3963", "33.7756", "North Ave NW", "Atlanta", "GA", "30332", "School", "(404) 894-2000", "gatech.edu", "Georgia Tech"} ;
-    public static final Location testing = new Location() ;
+    private static final String[] testTokens = {"84.3963", "33.7756", "North Ave NW", "Atlanta", "GA", "30332", "School", "(404) 894-2000", "gatech.edu", "Georgia Tech"} ;
+    private static final Location testing = new Location() ;
 
     @Test
     public void addLatitude() {

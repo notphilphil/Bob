@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -50,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    protected boolean loginPressed(String curr_login, String curr_password, File regUsers, Context context) {
+    boolean loginPressed(String curr_login, String curr_password, File regUsers, Context context) {
         if (regUsers.exists()) {
             try {
                 BufferedReader bReader = new BufferedReader(new FileReader(regUsers));
@@ -60,10 +59,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (curr_login.equals(parts[0]) && curr_password.equals(parts[2])) {
                         switch (LoggedUser.PermissionsEnum.valueOf(parts[3])) {
                             case NONE: break;
-                            case USER: LoggedUser.newInstance(new User(parts[1], parts[0]), context); break;
-                            case LOCATION_EMPLOYEE: LoggedUser.newInstance(new LocationEmployee(parts[1], parts[0]), context); break;
-                            case MANAGER: LoggedUser.newInstance(new Manager(), context); break;
-                            case ADMIN: LoggedUser.newInstance(new Admin(), context); break;
+                            case USER: LoggedUser.newInstance(new User(parts[1], parts[0])); break;
+                            case LOCATION_EMPLOYEE: LoggedUser.newInstance(new LocationEmployee(parts[1], parts[0])); break;
+                            case MANAGER: LoggedUser.newInstance(new Manager()); break;
+                            case ADMIN: LoggedUser.newInstance(new Admin()); break;
                             default: break;
                         }
                         if (!LoggedUser.getTesting()) {

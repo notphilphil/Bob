@@ -14,11 +14,11 @@ import java.io.OutputStreamWriter;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestLoginActivity {
-    static File file;
+class TestLoginActivity {
+    private static File file;
 
     @BeforeAll
-    public static void buildFile() {
+    static void buildFile() {
         LoggedUser.setTesting(true);
         file = new File("regUsers.txt");
     }
@@ -36,7 +36,7 @@ public class TestLoginActivity {
     }
 
     @Test
-    public void testLogin() {
+    void testLogin() {
         LoginActivity testClass = new LoginActivity();
         String user = "phil3";
         String pass = "lip3";
@@ -44,7 +44,7 @@ public class TestLoginActivity {
     }
 
     @Test
-    public void testLoginUserExists() {
+    void testLoginUserExists() {
         LoginActivity testClass = new LoginActivity();
         String user = "phil";
         String email = "pass";

@@ -1,7 +1,5 @@
 package com.example.notphilphil.bob.models;
 
-import android.util.Log;
-
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -14,7 +12,7 @@ public class Item implements Serializable {
 
     private String key;
 
-    protected static String[] tokens = {"type", "id", "color", "price", "category"};
+    static final String[] tokens = {"type", "id", "color", "price", "category"};
 
     public Item() {
         this("type", "id", "color", 0, "key", "category");

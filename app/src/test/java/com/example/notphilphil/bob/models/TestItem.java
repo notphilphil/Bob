@@ -2,15 +2,12 @@ package com.example.notphilphil.bob.models;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static junit.framework.Assert.assertEquals;
 
 
-public class TestItem {
+class TestItem {
     @Test
-    public void testAdd() {
+    void testAdd() {
         //register
         Item testing = new Item();
 

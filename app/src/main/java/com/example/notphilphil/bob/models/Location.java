@@ -13,35 +13,33 @@ public class Location {
     private double Longitude;
     private String City;
     private String Name;
-    private Inventory Inventory;
 
-    public static String[] tokens = {"Latitude", "Longitude", "Street Address", "City", "State", "Zip", "Type", "Phone", "Website", "Name"};
+    public static final String[] tokens = {"Latitude", "Longitude", "Street Address", "City", "State", "Zip", "Type", "Phone", "Website", "Name"};
     private String Key;
 
-    public Location(String zip, String type, String phone, String state, String streetAddress, String website, String latitude, String longitude, String city, String name, String key, Inventory inventory) {
+    private Location(String zip, String type, String phone, String state, String streetAddress, String website, String city, String name, String key, String lat, String lon) {
         Zip = zip;
         Type = type;
         Phone = phone;
         State = state;
         StreetAddress = streetAddress;
         Website = website;
-        Latitude = Double.parseDouble(latitude);
-        Longitude = Double.parseDouble(longitude);
+        Latitude = Double.parseDouble(lat);
+        Longitude = Double.parseDouble(lon);
         City = city;
         Name = name;
         Key = key;
-        Inventory = inventory;
     }
 
     public Location() {
-        this("zip", "type", "phone", "state", "streetAddress", "website", "0", "0", "city", "name", "key", new Inventory());
+
     }
 
     public String getZip() {
         return Zip;
     }
 
-    public void setZip(String zip) {
+    private void setZip(String zip) {
         Zip = zip;
     }
 
@@ -49,7 +47,7 @@ public class Location {
         return Type;
     }
 
-    public void setType(String type) {
+    private void setType(String type) {
         Type = type;
     }
 
@@ -57,7 +55,7 @@ public class Location {
         return Phone;
     }
 
-    public void setPhone(String phone) {
+    private void setPhone(String phone) {
         Phone = phone;
     }
 
@@ -65,7 +63,7 @@ public class Location {
         return State;
     }
 
-    public void setState(String state) {
+    private void setState(String state) {
         State = state;
     }
 
@@ -73,7 +71,7 @@ public class Location {
         return StreetAddress;
     }
 
-    public void setStreetAddress(String streetAddress) {
+    private void setStreetAddress(String streetAddress) {
         StreetAddress = streetAddress;
     }
 
@@ -81,7 +79,7 @@ public class Location {
         return Website;
     }
 
-    public void setWebsite(String website) {
+    private void setWebsite(String website) {
         Website = website;
     }
 
@@ -89,7 +87,7 @@ public class Location {
         return Latitude;
     }
 
-    public void setLatitude(double latitude) {
+    private void setLatitude(double latitude) {
         Latitude = latitude;
     }
 
@@ -97,7 +95,7 @@ public class Location {
         return Longitude;
     }
 
-    public void setLongitude(double longitude) {
+    private void setLongitude(double longitude) {
         Longitude = longitude;
     }
 
@@ -105,7 +103,7 @@ public class Location {
         return City;
     }
 
-    public void setCity(String city) {
+    private void setCity(String city) {
         City = city;
     }
 
@@ -113,7 +111,7 @@ public class Location {
         return Name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         Name = name;
     }
 

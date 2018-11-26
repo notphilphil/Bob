@@ -1,29 +1,21 @@
 package com.example.notphilphil.bob.controllers;
 
-import android.test.mock.MockContext;
-
 import com.example.notphilphil.bob.models.User;
 
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 public class TestLoggedUser {
-    @BeforeAll
-    public void init() {
-        LoggedUser.setTesting(true);
-    }
 
     @Test
     public void testLogout() {
         LoggedUser.setTesting(true);
         String id = "id";
         String name = "name";
-        LoggedUser.newInstance(new User(id, name), new MockContext());
+        LoggedUser.newInstance(new User(id, name));
 
         // Check if logged in
         assertEquals(id, LoggedUser.getId());

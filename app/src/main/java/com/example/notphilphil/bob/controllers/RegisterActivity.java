@@ -97,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
      * @param ut user type as a string
      * @return boolean reflecting whether or not the user was successfully registered
      */
-    protected boolean registerUser(String un, String em, String pw, String ut) throws IOException {
+    boolean registerUser(String un, String em, String pw, String ut) throws IOException {
         if (un.isEmpty() || em.isEmpty() || pw.isEmpty()) {
             return false;
         }
@@ -117,13 +117,13 @@ public class RegisterActivity extends AppCompatActivity {
                 if (un.equals(parts[0]) &&
                     pw.equals(parts[2]) &&
                     ut.equals(parts[3])) {
-                    Log.d("Registration", "Account already exists");
+                    //("Registration", "Account already exists");
                     String text = "Account already exists, logging with credentials";
                     Toast toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
                     toast.show();
                     found_duplicate = true;
                 } else {
-                    Log.d("Registration", "Email in use");
+                    // //("Registration", "Email in use");
                     emError = "Invalid: Email already in use";
                     return false;
                 }
@@ -134,20 +134,18 @@ public class RegisterActivity extends AppCompatActivity {
 
         switch (LoggedUser.PermissionsEnum.valueOf(ut)) {
             case NONE: return false;
-            case USER: LoggedUser.newInstance(new User(em, un), getBaseContext()); break;
-            case LOCATION_EMPLOYEE: LoggedUser.newInstance(new LocationEmployee(em, un), getBaseContext()); break;
-            case MANAGER: LoggedUser.newInstance(new Manager(), getBaseContext()); break;
-            case ADMIN: LoggedUser.newInstance(new Admin(), getBaseContext()); break;
+            case USER: LoggedUser.newInstance(new User(em, un)); break;
+            case LOCATION_EMPLOYEE: LoggedUser.newInstance(new LocationEmployee(em, un)); break;
+            case MANAGER: LoggedUser.newInstance(new Manager()); break;
+            case ADMIN: LoggedUser.newInstance(new Admin()); break;
             default: return false;
         }
-        Log.d("Registration", "Registration successful");
+        //("Registration", "Registration successful");
         return true;
     }
     public static void setTesting(boolean newTesting) {
         testing = newTesting;
     }
-
-    public static boolean getTesting() { return testing; }
 
     public void setRegUsers(File regUsers) {
         this.regUsers = regUsers;

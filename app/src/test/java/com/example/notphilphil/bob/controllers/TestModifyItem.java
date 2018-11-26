@@ -1,6 +1,5 @@
 package com.example.notphilphil.bob.controllers;
 
-import android.content.Context;
 import android.content.Intent;
 import android.test.mock.MockContext;
 import android.widget.EditText;
@@ -10,12 +9,8 @@ import com.example.notphilphil.bob.models.Item;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -26,26 +21,6 @@ import static junit.framework.Assert.assertEquals;
 public class TestModifyItem {
     @InjectMocks
     private ModifyItemActivity obj;
-
-    @Mock
-    static EditText type;
-    @Mock
-    static EditText id;
-    @Mock
-    static EditText color;
-    @Mock
-    static EditText price;
-    @Mock
-    static EditText category;
-
-    @Captor
-    private ArgumentCaptor<String> typeCaptor;
-
-    static EditText fakeType;
-    static EditText fakeId;
-    static EditText fakeColor;
-    static EditText fakePrice;
-    static EditText fakeCategory;
 
     @Before
     public void init() {

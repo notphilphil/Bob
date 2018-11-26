@@ -3,14 +3,10 @@ package com.example.notphilphil.bob.controllers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.notphilphil.bob.R;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -37,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    protected void onLogout(View v) {
+    private void onLogout(View v) {
         LoggedUser.logOut();
         if (!LoggedUser.getTesting()) {
             Intent intent = new Intent(v.getContext(), LoginActivity.class);

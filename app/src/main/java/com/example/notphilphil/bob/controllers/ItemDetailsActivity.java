@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class ItemDetailsActivity extends AppCompatActivity {
 
     @Override
@@ -46,13 +48,13 @@ public class ItemDetailsActivity extends AppCompatActivity {
                     TextView category_tv = findViewById(R.id.category_tv);
                     Item item = new Item();
                     for (DataSnapshot val : dataSnapshot.getChildren()) {
-                        item.addValue(val.getKey(), val.getValue().toString());
+                        item.addValue(val.getKey(), Objects.requireNonNull(val.getValue()).toString());
                     }
-                    type_tv.setText(dataSnapshot.child("type").getValue().toString());
-                    color_tv.setText(dataSnapshot.child("color").getValue().toString());
-                    id_tv.setText(dataSnapshot.child("id").getValue().toString());
-                    price_tv.setText(dataSnapshot.child("price").getValue().toString());
-                    category_tv.setText(dataSnapshot.child("category").getValue().toString());
+                    type_tv.setText(Objects.requireNonNull(dataSnapshot.child("type").getValue()).toString());
+                    color_tv.setText(Objects.requireNonNull(dataSnapshot.child("color").getValue()).toString());
+                    id_tv.setText(Objects.requireNonNull(dataSnapshot.child("id").getValue()).toString());
+                    price_tv.setText(Objects.requireNonNull(dataSnapshot.child("price").getValue()).toString());
+                    category_tv.setText(Objects.requireNonNull(dataSnapshot.child("category").getValue()).toString());
 
                     edit_btn.setOnClickListener(v -> {
                         Intent intent = new Intent(context, ModifyItemActivity.class);
