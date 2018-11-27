@@ -19,4 +19,10 @@
     <string name="delete">Delete</string>
     <string name="title_activity_maps">Map</string>
     <string name="category">Category</string>
+
+<!-- added facebook login stuff -->
+    <string name="facebook_app_id">293524841279421</string>
+    <string name="fb_login_protocol_scheme">fb293524841279421</string>
+<!-- end of facebook stuff -->
+
 </resources>

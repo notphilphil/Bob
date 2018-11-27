@@ -7,12 +7,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.notphilphil.bob.R;
 import com.example.notphilphil.bob.models.Admin;
 import com.example.notphilphil.bob.models.LocationEmployee;
 import com.example.notphilphil.bob.models.Manager;
 import com.example.notphilphil.bob.models.User;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,9 +30,17 @@ public class LoginActivity extends AppCompatActivity {
     private EditText login_et;
     private EditText password_et;
 
+    //for facebook
+    LoginButton loginButton;
+    TextView textView;
+    CallbackManager callbackManager;
+    //end of facebook items
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext()); //initialize facebook SDK
         setContentView(R.layout.activity_login);
 
         login_et = findViewById(R.id.username_et);
@@ -54,7 +69,43 @@ public class LoginActivity extends AppCompatActivity {
             LoggedUser.newInstance();
             startActivity(intent);
         });
+
+
+
+        /////////// start of facebook
+
+        loginButton = (LoginButton) findViewById(R.id.fblogin_button);  //facebook
+        textView = (TextView) findViewById(R.id.textView);  //facebook
+        callbackManager = CallbackManager.Factory.create(); //facebook
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() { //facebook
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Intent intent = new Intent(loginButton.getContext(),HomeActivity.class);
+                LoggedUser.newInstance();
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+
+        //////////end of facebook inside the onCreate() method
     }
+
+        //////method created for facebook activity
+        @Override
+            protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            callbackManager.onActivityResult(requestCode, resultCode, data) ;
+        };
+        /////////// end of facebook method
+
 
     boolean loginPressed(String curr_login, String curr_password, File regUsers, Context context) {
         if (regUsers.exists()) {
