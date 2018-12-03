@@ -15,7 +15,7 @@ public class TestLoggedUser {
         LoggedUser.setTesting(true);
         String id = "id";
         String name = "name";
-        LoggedUser.newInstance(new User(id, name));
+        LoggedUser.Companion.newInstance(new User(id, name));
 
         // Check if logged in
         assertEquals(id, LoggedUser.getId());
@@ -23,7 +23,7 @@ public class TestLoggedUser {
         assertEquals(LoggedUser.PermissionsEnum.USER, LoggedUser.getPermissions());
         assertTrue(LoggedUser.isLoggedIn());
 
-        LoggedUser.logOut();
+        LoggedUser.Companion.logOut();
 
         // Check if logged out
         assertEquals("", LoggedUser.getId());

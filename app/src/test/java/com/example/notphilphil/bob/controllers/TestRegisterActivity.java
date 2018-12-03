@@ -18,7 +18,7 @@ class TestRegisterActivity {
 
     @BeforeAll
     static void buildFile() {
-        RegisterActivity.setTesting(true);
+        RegisterActivity.Companion.setTesting(true);
         regUsers = new File("regUsers.txt");
     }
 

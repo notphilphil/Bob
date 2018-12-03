@@ -35,11 +35,11 @@ public class TestModifyItem {
     }
 
     private void setEditTexts() {
-        this.obj.type_et = new EditText(new MockContext());
-        this.obj.id_et = new EditText(new MockContext());
-        this.obj.color_et = new EditText(new MockContext());
-        this.obj.price_et = new EditText(new MockContext());
-        this.obj.category_et = new EditText(new MockContext());
+        this.obj.setType_et(new EditText(new MockContext()));
+        this.obj.setId_et(new EditText(new MockContext()));
+        this.obj.setColor_et(new EditText(new MockContext()));
+        this.obj.setPrice_et(new EditText(new MockContext()));
+        this.obj.setCategory_et(new EditText(new MockContext()));
     }
 
     @Test
@@ -56,11 +56,11 @@ public class TestModifyItem {
         newIntent.putExtra("item", newItem);
         this.setEditTexts();
         this.obj.populatePage(newItem);
-        assertEquals(newItem.getType(), this.obj.type_et.getText().toString());
-        assertEquals(newItem.getColor(), this.obj.color_et.getText().toString());
-        assertEquals(newItem.getId(), this.obj.id_et.getText().toString());
-        assertEquals(newItem.getPrice(), Double.parseDouble(this.obj.price_et.getText().toString()));
-        assertEquals(newItem.getCategory(), this.obj.category_et.getText().toString());
+        assertEquals(newItem.getType(), this.obj.getType_et().getText().toString());
+        assertEquals(newItem.getColor(), this.obj.getColor_et().getText().toString());
+        assertEquals(newItem.getId(), this.obj.getId_et().getText().toString());
+        assertEquals(newItem.getPrice(), Double.parseDouble(this.obj.getPrice_et().getText().toString()));
+        assertEquals(newItem.getCategory(), this.obj.getCategory_et().getText().toString());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class TestModifyItem {
         this.obj = new ModifyItemActivity();
         Item newItem = new Item("type", "id", "color", 0, "key", "category");
         this.setEditTexts();
-        this.obj.edit = true;
+        this.obj.setEdit(true);
         this.obj.populatePage(newItem);
         Item retItem = this.obj.onSave(new Intent());
         assertEquals(retItem.getType(), newItem.getType());
