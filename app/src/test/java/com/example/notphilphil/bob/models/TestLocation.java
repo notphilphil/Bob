@@ -10,61 +10,61 @@ public class TestLocation {
 
     @Test
     public void addLatitude() {
-        testing.addValue(Location.tokens[0], testTokens[0]) ;
+        testing.addValue(Location.Companion.getTokens()[0], testTokens[0]) ;
         assertEquals(testTokens[0], Double.toString(testing.getLatitude())) ;
     }
 
     @Test
     public void addLongitude() {
-        testing.addValue(Location.tokens[1], testTokens[1]) ;
+        testing.addValue(Location.Companion.getTokens()[1], testTokens[1]) ;
         assertEquals(testTokens[1], Double.toString(testing.getLongitude())) ;
     }
 
     @Test
     public void addStreetAddress() {
-        testing.addValue(Location.tokens[2], testTokens[2]) ;
+        testing.addValue(Location.Companion.getTokens()[2], testTokens[2]) ;
         assertEquals(testTokens[2], testing.getStreetAddress()) ;
     }
 
     @Test
     public void addCity() {
-        testing.addValue(Location.tokens[3], testTokens[3]) ;
+        testing.addValue(Location.Companion.getTokens()[3], testTokens[3]) ;
         assertEquals(testTokens[3], testing.getCity()) ;
     }
 
     @Test
     public void addState() {
-        testing.addValue(Location.tokens[4], testTokens[4]);
+        testing.addValue(Location.Companion.getTokens()[4], testTokens[4]);
         assertEquals(testTokens[4], testing.getState());
     }
 
     @Test
     public void addZip() {
-        testing.addValue(Location.tokens[5], testTokens[5]);
+        testing.addValue(Location.Companion.getTokens()[5], testTokens[5]);
         assertEquals(testTokens[5], testing.getZip());
     }
 
     @Test
     public void addType() {
-        testing.addValue(Location.tokens[6], testTokens[6]);
+        testing.addValue(Location.Companion.getTokens()[6], testTokens[6]);
         assertEquals(testTokens[6], testing.getType());
     }
 
     @Test
     public void addPhone() {
-        testing.addValue(Location.tokens[7], testTokens[7]);
+        testing.addValue(Location.Companion.getTokens()[7], testTokens[7]);
         assertEquals(testTokens[7], testing.getPhone());
     }
 
     @Test
     public void addWebsite() {
-        testing.addValue(Location.tokens[8], testTokens[8]);
+        testing.addValue(Location.Companion.getTokens()[8], testTokens[8]);
         assertEquals(testTokens[8], testing.getWebsite());
     }
 
     @Test
     public void addName() {
-        testing.addValue(Location.tokens[9], testTokens[9]);
+        testing.addValue(Location.Companion.getTokens()[9], testTokens[9]);
         assertEquals(testTokens[9], testing.getName());
     }
 }

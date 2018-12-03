@@ -114,7 +114,6 @@ public class LocationDetailsActivity extends AppCompatActivity {
                         }
                         return false;
                     }
-
                 });
 
                 OnItemSelectedListener categorySelectedListener;
@@ -150,7 +149,7 @@ public class LocationDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String body = "";
                 String title = Objects.requireNonNull(dataSnapshot.child("Name").getValue()).toString();
-                for (String token : Location.tokens) {
+                for (String token : Location.Companion.getTokens()) {
                     body += token + ": " + Objects.requireNonNull(dataSnapshot.child(token).getValue()).toString() + "\n";
                 }
                 String finalBody = body;

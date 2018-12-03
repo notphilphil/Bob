@@ -38,19 +38,19 @@ public class LoggedUser<T> {
     }
 
     static void newInstance(User value) {
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.USER, "");
+        new LoggedUser<>(value.getName(), value.getId(), PermissionsEnum.USER, "");
     }
 
     static void newInstance(LocationEmployee value) {
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.LOCATION_EMPLOYEE, "");
+        new LoggedUser<>(value.getName(), value.getId(), PermissionsEnum.LOCATION_EMPLOYEE, "");
     }
     
     static void newInstance(Manager value) {
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.MANAGER, "");
+        new LoggedUser<>(value.getName(), value.getId(), PermissionsEnum.MANAGER, "");
     }
 
     static void newInstance(Admin value) {
-        new LoggedUser<>(value.getName(), value.getID(), PermissionsEnum.ADMIN, "");
+        new LoggedUser<>(value.getName(), value.getId(), PermissionsEnum.ADMIN, "");
     }
 
 
