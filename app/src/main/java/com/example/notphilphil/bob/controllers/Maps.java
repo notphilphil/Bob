@@ -1,10 +1,21 @@
 package com.example.notphilphil.bob.controllers;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.notphilphil.bob.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,7 +32,11 @@ import com.google.firebase.database.ValueEventListener;
 public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-
+    private LocationManager locationManager;
+    private LocationListener locationListener;
+    //private Button myLoc ;
+    private Location myLocation ;
+    //private FusedLocationProviderClient mFusedLocationClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +45,35 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+                locationListener.onLocationChanged(location);
+                //mMap.addMarker(new MarkerOptions().position(location).title("My Location")) ;
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -59,6 +102,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
         DatabaseReference ref = LoggedUser.getRef().child("locations");
         ref.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot loc : dataSnapshot.getChildren()) {
@@ -72,6 +116,15 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                             .title(name)
                             .snippet("Phone: "+phone));
                 }
+
+                //ADD ANOTHER MARKER TO DISPLAY CURRENT LOCATION
+
+                //myLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                //myLocation = new Location(myLocation) ;
+                //locationListener.onLocationChanged(myLocation);
+                LatLng myLoc = new LatLng(33.777211, -84.397474);
+                mMap.addMarker(new MarkerOptions().position(myLoc).title("My Location")) ;
+
                 mMap.moveCamera(CameraUpdateFactory
                         .newLatLng(new LatLng(33.775331,-84.395824)));
                 mMap.setMaxZoomPreference(20);
