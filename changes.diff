@@ -1,0 +1,221 @@
+diff --git a/app/build.gradle b/app/build.gradle
+index f811d5a..b7d7107 100644
+--- a/app/build.gradle
++++ b/app/build.gradle
+@@ -56,6 +56,8 @@ dependencies {
+     testImplementation 'org.mockito:mockito-core:2.7.22'
+     // required if you want to use Mockito for Android tests
+     androidTestImplementation 'org.mockito:mockito-android:2.7.22'
++    implementation 'com.facebook.android:facebook-login:[4,5)'
++
+ 
+ }
+ repositories {	mavenCentral() }
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+index b811b34..c588cab 100644
+--- a/app/src/main/AndroidManifest.xml
++++ b/app/src/main/AndroidManifest.xml
+@@ -8,7 +8,6 @@
+          location permissions for the 'MyLocation' functionality. 
+     -->
+     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+-
+     <application
+         android:allowBackup="true"
+         android:icon="@mipmap/ic_launcher"
+@@ -37,13 +36,37 @@
+              sign the APK for publishing.
+              You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+         -->
+-        <meta-data
+-            android:name="com.google.android.geo.API_KEY"
+-            android:value="@string/google_maps_key" />
+ 
++
++
++
++
++        <!-- start of facebook metadata!! -->
++        <meta-data android:name="com.facebook.sdk.ApplicationId"
++            android:value="@string/facebook_app_id"/>
++
++        <activity android:name="com.facebook.FacebookActivity"
++            android:configChanges=
++                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
++            android:label="@string/app_name" />
+         <activity
+-            android:name=".controllers.Maps"
+-            android:label="@string/title_activity_maps"></activity>
++            android:name="com.facebook.CustomTabActivity"
++            android:exported="true">
++            <intent-filter>
++                <action android:name="android.intent.action.VIEW" />
++                <category android:name="android.intent.category.DEFAULT" />
++                <category android:name="android.intent.category.BROWSABLE" />
++                <data android:scheme="@string/fb_login_protocol_scheme" />
++            </intent-filter>
++        </activity>
++
++        <!-- end of facebook meta data -->
++
++
+     </application>
+ 
++    <!-- added for facebook permissions -->
++    <uses-permission android:name="android.permission.INTERNET"/>
++    <!-- end of permission added for facebook -->
++
+ </manifest>
+\ No newline at end of file
+diff --git a/app/src/main/java/com/example/notphilphil/bob/controllers/LoginActivity.java b/app/src/main/java/com/example/notphilphil/bob/controllers/LoginActivity.java
+index 37e9517..bc4de7a 100644
+--- a/app/src/main/java/com/example/notphilphil/bob/controllers/LoginActivity.java
++++ b/app/src/main/java/com/example/notphilphil/bob/controllers/LoginActivity.java
+@@ -7,12 +7,19 @@ import android.os.Bundle;
+ import android.util.Log;
+ import android.widget.Button;
+ import android.widget.EditText;
++import android.widget.TextView;
+ 
+ import com.example.notphilphil.bob.R;
+ import com.example.notphilphil.bob.models.Admin;
+ import com.example.notphilphil.bob.models.LocationEmployee;
+ import com.example.notphilphil.bob.models.Manager;
+ import com.example.notphilphil.bob.models.User;
++import com.facebook.CallbackManager;
++import com.facebook.FacebookCallback;
++import com.facebook.FacebookException;
++import com.facebook.FacebookSdk;
++import com.facebook.login.LoginResult;
++import com.facebook.login.widget.LoginButton;
+ 
+ import java.io.BufferedReader;
+ import java.io.File;
+@@ -23,9 +30,17 @@ public class LoginActivity extends AppCompatActivity {
+     private EditText login_et;
+     private EditText password_et;
+ 
++    //for facebook
++    LoginButton loginButton;
++    TextView textView;
++    CallbackManager callbackManager;
++    //end of facebook items
++
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
++        FacebookSdk.sdkInitialize(getApplicationContext()); //initialize facebook SDK
+         setContentView(R.layout.activity_login);
+ 
+         login_et = findViewById(R.id.username_et);
+@@ -54,8 +69,44 @@ public class LoginActivity extends AppCompatActivity {
+             LoggedUser.newInstance();
+             startActivity(intent);
+         });
++
++
++
++        /////////// start of facebook
++
++        loginButton = (LoginButton) findViewById(R.id.fblogin_button);  //facebook
++        textView = (TextView) findViewById(R.id.textView);  //facebook
++        callbackManager = CallbackManager.Factory.create(); //facebook
++        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() { //facebook
++            @Override
++            public void onSuccess(LoginResult loginResult) {
++                Intent intent = new Intent(loginButton.getContext(),HomeActivity.class);
++                LoggedUser.newInstance();
++                startActivity(intent);
++            }
++
++            @Override
++            public void onCancel() {
++
++            }
++
++            @Override
++            public void onError(FacebookException error) {
++
++            }
++        });
++
++        //////////end of facebook inside the onCreate() method
+     }
+ 
++        //////method created for facebook activity
++        @Override
++            protected void onActivityResult(int requestCode, int resultCode, Intent data) {
++            callbackManager.onActivityResult(requestCode, resultCode, data) ;
++        };
++        /////////// end of facebook method
++
++
+     boolean loginPressed(String curr_login, String curr_password, File regUsers, Context context) {
+         if (regUsers.exists()) {
+             try {
+diff --git a/app/src/main/res/layout/activity_login.xml b/app/src/main/res/layout/activity_login.xml
+index 0d2543b..65ff634 100644
+--- a/app/src/main/res/layout/activity_login.xml
++++ b/app/src/main/res/layout/activity_login.xml
+@@ -46,7 +46,7 @@
+         android:layout_marginLeft="8dp"
+         android:layout_marginRight="8dp"
+         android:layout_marginStart="8dp"
+-        android:layout_marginTop="8dp"
++        android:layout_marginTop="16dp"
+         android:text="Register"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+@@ -84,6 +84,7 @@
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/username_et" />
+ 
++
+     <TextView
+         android:id="@+id/password_tv"
+         android:layout_width="wrap_content"
+@@ -117,4 +118,14 @@
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/register_button" />
++
++
++    <com.facebook.login.widget.LoginButton
++        android:id="@+id/fblogin_button"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_gravity="center_horizontal"
++        tools:layout_editor_absoluteX="16dp"
++        tools:layout_editor_absoluteY="16dp" />
++
+ </android.support.constraint.ConstraintLayout>
+\ No newline at end of file
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+index 3e7441a..72075ea 100644
+--- a/app/src/main/res/values/strings.xml
++++ b/app/src/main/res/values/strings.xml
+@@ -19,4 +19,10 @@
+     <string name="delete">Delete</string>
+     <string name="title_activity_maps">Map</string>
+     <string name="category">Category</string>
++
++<!-- added facebook login stuff -->
++    <string name="facebook_app_id">293524841279421</string>
++    <string name="fb_login_protocol_scheme">fb293524841279421</string>
++<!-- end of facebook stuff -->
++
+ </resources>
+diff --git a/build.gradle b/build.gradle
+index 82f8bf1..b831097 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -5,6 +5,8 @@ buildscript {
+     repositories {
+         google()
+         jcenter()
++        jcenter()
++
+     }
+     dependencies {
+         classpath 'com.android.tools.build:gradle:3.2.1'
